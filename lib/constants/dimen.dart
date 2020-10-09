@@ -1,0 +1,3 @@
+const CARD_PADDING = 8.0;
+const CARD_ELEVATION = 1.0;
+const LINE_HEIGHT = 16.0;
