@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:sales_popular/ui/pages/new_enquiry_page.dart';
 import './constants/colors.dart';
 import './constants/strings.dart';
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
 
   final routes = <String,WidgetBuilder>{
     HOME_PAGE: (context)=>HomePage(),
-    NEW_ENQUIRY_PAGE: (context)=>NewEnquiryPage(),
+    NEW_ENQUIRY_PAGE: (context)=>ChangeNotifierProvider(create:(context)=>FormData(),child: NewEnquiryPage()),
   };
 
 
