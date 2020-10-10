@@ -73,17 +73,17 @@ class FormData extends ChangeNotifier{
     }
     
     void initDataLoading(){
-      getCutomerType();
+      getCustomerType();
       getSalutations();
       getStates();
       getCarMakes();
     }
 
-    void getCutomerType() {
+    void getCustomerType() {
       isCustomerTypeLoading = true;
       api.getData('getcustomertypes').then((value){
         if(value.status){
-          customerType = value.data[0]['customerType'];
+          customerType = new List<String>.from(value.data[0]['customerType']);
           isCustomerTypeLoading = false;
         }
       });
@@ -95,7 +95,7 @@ class FormData extends ChangeNotifier{
       isStatesLoading = true;
       api.getData('getstates').then((value){
         if(value.status){
-          states = value.data[0]['state'];
+          states = new List<String>.from(value.data[0]['state']);
           isStatesLoading = false;
         }
       });
@@ -105,7 +105,7 @@ class FormData extends ChangeNotifier{
       isSalutationLoading = true;
       api.getData('getsalutations').then((value){
         if(value.status){
-          states = value.data[0]['salutation'];
+          salutations = new List<String>.from(value.data[0]['salutation']);
           isSalutationLoading = false;
         }
       });
@@ -115,7 +115,7 @@ class FormData extends ChangeNotifier{
       isSalutationLoading = true;
       api.getData('getcarmakes').then((value){
         if(value.status){
-          states = value.data[0]['carMake'];
+          carMake = new List<String>.from(value.data[0]['carMake']);
           isSalutationLoading = false;
         }
       });
