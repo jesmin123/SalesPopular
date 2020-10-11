@@ -35,6 +35,7 @@ class FormData extends ChangeNotifier{
     set carMake(List<String> value) {
       _carMake = value;
     }
+
   // Loaders
     bool _isCustomerTypeLoading = false;
     bool _isSalutationLoading = false;

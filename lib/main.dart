@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
 
   final routes = <String,WidgetBuilder>{
     HOME_PAGE: (context)=>HomePage(),
-    NEW_ENQUIRY_PAGE: (context)=>ChangeNotifierProvider(create:(context)=>FormData(),child: NewEnquiryPage()),
+    NEW_ENQUIRY_PAGE: (context)=>ChangeNotifierProvider(create:(context)=>FormData(),child: NewEnquiryPage(),),
   };
 
 

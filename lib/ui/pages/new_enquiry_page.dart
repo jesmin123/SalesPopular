@@ -7,7 +7,7 @@ import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:sales_popular/ui/widget/customer_detail_entry_form.dart';
-import 'package:sales_popular/utils/SubAppBar.dart';
+import 'file:///G:/FlutterApps/sales_popular/lib/ui/widget/SubAppBar.dart';
 
 class NewEnquiryPage extends StatefulWidget {
   @override
@@ -25,7 +25,6 @@ class _NewEnquiryPageState extends State<NewEnquiryPage> {
   getSupportingData(){
 
     final FormData formData = Provider.of(context,listen: false);
-    // This method solves changing state of data when widget is building
     WidgetsBinding.instance.addPostFrameCallback((_) {
 
       formData.initDataLoading();
@@ -43,11 +42,11 @@ class _NewEnquiryPageState extends State<NewEnquiryPage> {
             type: FAStepperType.horizontal,
             titleHeight: 120,
             steps:[
-                FAStep(state: FAStepstate.complete, title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),textAlign: TextAlign.center,), content: CustomerDetailEntryForm(formData),isActive: true,),
-                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: CustomerDetailEntryForm(formData)),
-                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: CustomerDetailEntryForm(formData)),
-                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: CustomerDetailEntryForm(formData)),
-                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: CustomerDetailEntryForm(formData)),
+                FAStep(state: FAStepstate.complete, title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),textAlign: TextAlign.center,), content: CustomerDetailEntryForm(formData,null),isActive: true,),
+                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: Container()),
+                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: Container()),
+                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: Container()),
+                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: Container()),
           ],
 
         ),

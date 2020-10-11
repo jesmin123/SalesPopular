@@ -45,7 +45,7 @@ class ApiUtils {
     }
   }
 
-  Future<RespObj> fileUplaod(String route,File file, String fileName,{String header,String id}) async{
+  Future<RespObj> fileUpload(String route,File file, String fileName,{String header,String id}) async{
     
     var request = MultipartRequest("POST", Uri.parse(baseUrl+route));
     request.fields["id"] = id;
