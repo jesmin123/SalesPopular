@@ -10,7 +10,7 @@ class ApiUtils {
   ApiUtils.internal();
 
   factory ApiUtils() => _instance;
-  static final baseUrl = "http://15.206.106.58/";
+  static final baseUrl = "http://13.234.53.184/testmobappapis/api/test/";
 
   Future<RespObj> getData(String route,{String header}) async{
     Map<String, String> mHeaders = {"Content-type": "application/json","x-auth-token":header};
@@ -19,7 +19,7 @@ class ApiUtils {
       print(json.decode(response.body));
       if(response.statusCode==200){
         print(json.decode(response.body));
-        return RespObj.fromJSON(json.decode(response.body));
+        return RespObj(true,data: jsonDecode(response.body));
       }else{
         return RespObj(false,msg: response.body);
       }
@@ -45,7 +45,7 @@ class ApiUtils {
     }
   }
 
-  Future<RespObj> fileUplaod(String route,File file, String fileName,{String header,String id}) async{
+  Future<RespObj> fileUpload(String route,File file, String fileName,{String header,String id}) async{
     
     var request = MultipartRequest("POST", Uri.parse(baseUrl+route));
     request.fields["id"] = id;
