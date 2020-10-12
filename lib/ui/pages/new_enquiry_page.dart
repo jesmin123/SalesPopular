@@ -6,8 +6,9 @@ import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
+import 'package:sales_popular/ui/widget/SubAppBar.dart';
 import 'package:sales_popular/ui/widget/customer_detail_entry_form.dart';
-import 'file:///G:/FlutterApps/sales_popular/lib/ui/widget/SubAppBar.dart';
+
 
 class NewEnquiryPage extends StatefulWidget {
   @override

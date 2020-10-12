@@ -7,14 +7,23 @@ import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
 
-class CustomerDetailEntryForm extends StatelessWidget {
+
+class CustomerDetailEntryForm extends StatefulWidget {
 
   final FormData _formData;
   final EnquiryProvider _enquiryData;
 
+  CustomerDetailEntryForm(this._formData,this._enquiryData);
+
+  @override
+  _CustomerDetailEntryFormState createState() => _CustomerDetailEntryFormState();
+}
+
+class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
+
   TextEditingController _nameController;
 
-  CustomerDetailEntryForm(this._formData,this._enquiryData){
+  _CustomerDetailEntryFormState(){
     _nameController = TextEditingController();
   }
 
@@ -30,7 +39,7 @@ class CustomerDetailEntryForm extends StatelessWidget {
               underline: Container(),
               hint: Text('Select customer type'),
               icon: Icon(Icons.keyboard_arrow_down),
-              items: _formData.customerType.map((e){
+              items: widget._formData.customerType.map((e){
                 return DropdownMenuItem(child: Text(e),value: e,);
               }).toList(),
               onChanged: onCustomerTypeChanged
