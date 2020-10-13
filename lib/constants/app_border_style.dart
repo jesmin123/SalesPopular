@@ -18,4 +18,9 @@ class AppBorderStyle{
         border: Border.all(width: BORDER_WIDTH,color:APP_BORDER_COLOR,)
     );
   }
+
+  static RoundedRectangleBorder appButtonShape({Color color}){
+    return   RoundedRectangleBorder(borderRadius: BorderRadius.circular(BORDER_RADIUS));
+
+  }
 }
