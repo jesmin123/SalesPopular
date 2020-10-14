@@ -7,8 +7,12 @@ import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
+import 'package:sales_popular/ui/widget/SubAppBar.dart';
+import 'package:sales_popular/ui/widget/booking_details_entry_form.dart';
 import 'package:sales_popular/ui/widget/customer_detail_entry_form.dart';
-import 'file:///G:/FlutterApps/sales_popular/lib/ui/widget/SubAppBar.dart';
+import 'package:sales_popular/ui/widget/new_car_detail_entry_form.dart';
+import 'package:sales_popular/ui/widget/old_car_details_entry_form.dart';
+
 
 class NewEnquiryPage extends StatefulWidget {
   @override
@@ -43,21 +47,23 @@ class _NewEnquiryPageState extends State<NewEnquiryPage> {
       appBar: MAppBar(NEW_ENQUIRY_PAGE_TITLE),
       backgroundColor: APP_WHITE_COLOR,
       body: SafeArea(
-        child: FAStepper(
-            type: FAStepperType.horizontal,
-            titleHeight: 120,
-            currentStep: enquiryProvider.stepNo,
-            titleIconArrange: FAStepperTitleIconArrange.row,
-            steps:[
-                FAStep(state: FAStepstate.complete, title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),textAlign: TextAlign.center,), content: CustomerDetailEntryForm(formData,enquiryProvider),isActive: true,),
-                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: Container()),
-                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: Container()),
-                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: Container()),
-                FAStep(title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: Container()),
-            ],
-          controlsBuilder: (BuildContext context,
-              {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
-              Container(),
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: FAStepper(
+              type: FAStepperType.horizontal,
+              titleHeight: 120,
+              currentStep: 3,
+              titleIconArrange: FAStepperTitleIconArrange.row,
+              steps:[
+                  FAStep(state: FAStepstate.complete, title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),textAlign: TextAlign.center,), content: CustomerDetailEntryForm(formData,enquiryProvider),),
+                  FAStep(state: FAStepstate.complete, title: Text(NEW_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: NewCarDetailEntryForm(formData,enquiryProvider), ),
+                  FAStep(state: FAStepstate.complete, title: Text(OLD_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: OldCarDetailEntryForm(formData,enquiryProvider), isActive: true,),
+                  FAStep(state: FAStepstate.complete, title: Text(BOOKING_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: BookingDetailEntryForm(formData,enquiryProvider), isActive: true,)
+              ],
+            controlsBuilder: (BuildContext context,
+                {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
+                Container(),
+          ),
         )
       ),
     );
