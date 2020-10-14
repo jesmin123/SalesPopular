@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sales_popular/ui/pages/my_profile.dart';
+import 'package:sales_popular/ui/pages/my_profile_page.dart';
 import './provider/cases_provider.dart';
 import './provider/enquiry_provider.dart';
 import './provider/form_data_provider.dart';
