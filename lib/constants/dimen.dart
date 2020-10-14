@@ -8,3 +8,4 @@ const TEXT_WIDTH = 12.0;
 const BUTTON_WIDTH = 99.0;
 const DIVIDER_THICKNESS = 1.0;
 const ICON_SIZE = 14.0;
+const LIST_TILE_PADDING = 10.0;
