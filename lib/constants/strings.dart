@@ -5,14 +5,18 @@ const LOGIN_PAGE = 'loginPage';
 const HOME_PAGE = 'homePage';
 const NEW_ENQUIRY_PAGE = 'newEnquiryPage';
 const ALL_ENQUIRY_PAGE = "allEnquiryPage";
+const MY_PROFILE = "myProfilePage";
+
+
 
 
 // Page Titles
 
 const NEW_ENQUIRY_PAGE_TITLE = "New Enquiry";
 const PROFILE_PAGE_TITLE = "My Profile";
-const DELOVERY_PAGE_TITLE = "Delivery";
-
+const DELiVERY_PAGE_TITLE = "Delivery";
+const ALL_ENQUIRY_TITLE = "All Enquiry";
+const MY_PROFILE_PAGE = 'My Profile';
 
 // Step Titles
 

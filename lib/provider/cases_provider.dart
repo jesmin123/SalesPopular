@@ -12,7 +12,7 @@ class CasesProvider extends ChangeNotifier{
     CaseModel case1 = new CaseModel(status: "Serviced",customerName: "Aby Thomas",time: "10:30 AM",vehicleName: "Maruti Suzuki Celerio");
     addToCases(case1);
     isCaseLoading = false;
-    CaseModel case2 = new CaseModel(status: "Pending",customerName: "Biby Chacko",time: "1:45 PM",vehicleName: "Maruti Suzuki Swift");
+    CaseModel case2 = new CaseModel(status: "Pending",customerName: "Biby Chacko",time: "01:45 PM",vehicleName: "Maruti Suzuki Swift");
     addToCases(case2);
     CaseModel case3 = new CaseModel(status: "Serviced",customerName: "Aby Thomas",time: "09:00 AM",vehicleName: "Maruti Suzuki Alto");
     addToCases(case3);

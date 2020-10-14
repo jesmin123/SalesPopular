@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales_popular/ui/pages/my_profile_page.dart';
 import './provider/cases_provider.dart';
 import './provider/enquiry_provider.dart';
 import './provider/form_data_provider.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     HOME_PAGE: (context)=>HomePage(),
     NEW_ENQUIRY_PAGE: (context)=>NewEnquiryPage(),
     ALL_ENQUIRY_PAGE : (context)=>AllEnquiryPage(),
+    MY_PROFILE : (context)=>MyProfilePage(),
   };
 
   @override
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: APP_WHITE_COLOR
         ),
         routes: routes,
-        initialRoute: ALL_ENQUIRY_PAGE,
+        initialRoute: MY_PROFILE,
       ),
     );
   }
