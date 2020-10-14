@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sales_popular/provider/enquiry_provider.dart';
-import 'package:sales_popular/provider/form_data_provider.dart';
-import 'package:sales_popular/ui/pages/new_enquiry_page.dart';
+import './provider/cases_provider.dart';
+import './provider/enquiry_provider.dart';
+import './provider/form_data_provider.dart';
+import './ui/pages/all_enquiry_page.dart';
+import './ui/pages/new_enquiry_page.dart';
 import './constants/colors.dart';
 import './constants/strings.dart';
 import 'ui/pages/home_page.dart';
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
   final routes = <String,WidgetBuilder>{
     HOME_PAGE: (context)=>HomePage(),
     NEW_ENQUIRY_PAGE: (context)=>NewEnquiryPage(),
+    ALL_ENQUIRY_PAGE : (context)=>AllEnquiryPage(),
   };
 
   @override
@@ -25,6 +28,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<FormData>(create: (_)=>FormData()),
         ChangeNotifierProvider<EnquiryProvider>(create: (_)=>EnquiryProvider()),
+        ChangeNotifierProvider<CasesProvider>(create: (_)=>CasesProvider()),
       ],
       child: MaterialApp(
         title: APP_NAME,
@@ -34,7 +38,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: APP_WHITE_COLOR
         ),
         routes: routes,
-        initialRoute: NEW_ENQUIRY_PAGE,
+        initialRoute: ALL_ENQUIRY_PAGE,
       ),
     );
   }

@@ -4,6 +4,7 @@ const APP_NAME = "Sales Popular";
 const LOGIN_PAGE = 'loginPage';
 const HOME_PAGE = 'homePage';
 const NEW_ENQUIRY_PAGE = 'newEnquiryPage';
+const ALL_ENQUIRY_PAGE = "allEnquiryPage";
 
 
 // Page Titles
