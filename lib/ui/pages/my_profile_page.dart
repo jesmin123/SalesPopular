@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:sales_popular/provider/user_data_provider.dart';
 import 'package:sales_popular/ui/widget/cases_item_widget.dart';
 import '../../provider/cases_provider.dart';
 import 'package:fa_stepper/fa_stepper.dart';
@@ -21,15 +22,31 @@ class MyProfilePage extends StatefulWidget {
 }
 
 class _MyProfilePageState extends State<MyProfilePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    getSupportingData();
+  }
+
+  getSupportingData(){
+
+    final UserDataProvider userDataProvider = Provider.of(context,listen: false);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      userDataProvider.getData();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
         appBar: MAppBar(ALL_ENQUIRY_TITLE),
-    backgroundColor: APP_WHITE_COLOR,
-    body: SafeArea(
-      child: CircleAvatar(backgroundImage: CachedNetworkImageProvider('https://diwali2012.in/subho-nababarsha/'),),
-    )
+        backgroundColor: APP_WHITE_COLOR,
+        body: SafeArea(
+          child: CircleAvatar(backgroundImage: CachedNetworkImageProvider('https://diwali2012.in/subho-nababarsha/'),),
+        )
     );
 
   }

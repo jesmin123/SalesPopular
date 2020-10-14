@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales_popular/provider/user_data_provider.dart';
 import 'package:sales_popular/ui/pages/my_profile_page.dart';
 import './provider/cases_provider.dart';
 import './provider/enquiry_provider.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<FormData>(create: (_)=>FormData()),
         ChangeNotifierProvider<EnquiryProvider>(create: (_)=>EnquiryProvider()),
         ChangeNotifierProvider<CasesProvider>(create: (_)=>CasesProvider()),
+        ChangeNotifierProvider<UserDataProvider>(create: (_)=>UserDataProvider()),
       ],
       child: MaterialApp(
         title: APP_NAME,
