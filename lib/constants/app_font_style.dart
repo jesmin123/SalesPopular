@@ -30,6 +30,15 @@ class AppFontStyle{
     );
   }
 
+  static TextStyle bodyTextStyle2(Color color, {num textSize}) {
+    return TextStyle(
+        color: color,
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
+        fontFamily: "Poppins"
+    );
+  }
+
   static TextStyle headingTextStyle(Color color, {num textSize}) {
     return TextStyle(
         color: color,
@@ -44,6 +53,15 @@ class AppFontStyle{
         color: color,
         fontSize: 16,
         fontWeight: FontWeight.w400,
+        fontFamily: "Poppins"
+    );
+  }
+
+  static TextStyle regularTextStyle2(Color color, {num textSize}) {
+    return TextStyle(
+        color: color,
+        fontSize: 16,
+        fontWeight: FontWeight.w300,
         fontFamily: "Poppins"
     );
   }
