@@ -8,4 +8,9 @@ const TEXT_WIDTH = 12.0;
 const BUTTON_WIDTH = 99.0;
 const DIVIDER_THICKNESS = 1.0;
 const ICON_SIZE = 14.0;
+const ICON_SIZE_EDIT = 18.0;
 const LIST_TILE_PADDING = 10.0;
+const CIRCLE_AVATAR_RADIUS = 64.0;
+const PADDING_WIDTH = 8.0;
+const PADDING_WIDTH_2 = 16.0;
+

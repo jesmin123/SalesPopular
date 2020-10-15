@@ -6,6 +6,8 @@ const HOME_PAGE = 'homePage';
 const NEW_ENQUIRY_PAGE = 'newEnquiryPage';
 const ALL_ENQUIRY_PAGE = "allEnquiryPage";
 const MY_PROFILE = "myProfilePage";
+const DELIVERY_PAGE = 'DeliveryPage';
+const FOLLOW_UP_PAGE = 'FollowUpPage';
 
 
 
@@ -17,6 +19,10 @@ const PROFILE_PAGE_TITLE = "My Profile";
 const DELiVERY_PAGE_TITLE = "Delivery";
 const ALL_ENQUIRY_TITLE = "All Enquiry";
 const MY_PROFILE_PAGE = 'My Profile';
+const DELIVERY = 'Delivery';
+const FOLLOW_UP = 'Follow Up';
+
+
 
 // Step Titles
 
@@ -73,12 +79,29 @@ const CHECK_AVAILABILITY = "Check Availability";
 const GET_PRICE = "Get Price";
 const FINISH = "Finish";
 const DELETE_CASE = "Delete Case";
+const EDIT = "Edit";
+const CHANGE_PASSWORD = "Change Password";
+const MARK_DELIVERED = "Mark Delivered";
 
+const CUSTOMER_DETAILS = "Customer Details";
+const TEMP = "TEMP-06-99-B";
 
 // texts
 
-const FOLLOW_UP = "Follow Up";
 const SCHEDULE_FOR_TEST_DRIVE = "Schedule for Test Drive";
 const PRICE = "Price";
+const PERSONAL_DETAILS = "Personal Details";
+const BRANCH_DETAILS = "Branch Details";
+const NAME = "Name";
+const PHONE_NO = "Phone No";
+const EMP_ID = "Emp ID";
+const USER_NAME = "Username";
+
+const BRANCH_NAME = "Branch Name";
+const BRANCH_CODE = "Branch Code";
+const USER_ID = "User ID";
+const DEPARTMENT = "Department";
+
+const COPYRIGHT_POPULAR_MOTORS = "© Popular Motors";
 
 
