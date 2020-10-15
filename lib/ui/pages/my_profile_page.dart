@@ -1,26 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/dimen.dart';
-import 'package:sales_popular/model/UserData.dart';
-import 'package:sales_popular/model/UserData.dart';
-import 'package:sales_popular/model/UserData.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
-import 'package:sales_popular/ui/widget/cases_item_widget.dart';
-import '../../provider/cases_provider.dart';
-import 'package:fa_stepper/fa_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/strings.dart';
-import 'package:sales_popular/provider/enquiry_provider.dart';
-import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:sales_popular/ui/widget/SubAppBar.dart';
-import 'package:sales_popular/ui/widget/booking_details_entry_form.dart';
-import 'package:sales_popular/ui/widget/customer_detail_entry_form.dart';
-import 'package:sales_popular/ui/widget/new_car_detail_entry_form.dart';
-import 'package:sales_popular/ui/widget/old_car_details_entry_form.dart';
 
 class MyProfilePage extends StatefulWidget {
   @override

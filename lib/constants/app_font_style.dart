@@ -66,6 +66,15 @@ class AppFontStyle{
     );
   }
 
+  static TextStyle regularTextStyle3(Color color, {num textSize}) {
+    return TextStyle(
+        color: color,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        fontFamily: "Poppins"
+    );
+  }
+
   static TextStyle regularHeadingTextStyle(Color color, {num textSize}) {
     return TextStyle(
         color: color,
