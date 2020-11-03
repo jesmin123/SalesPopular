@@ -82,7 +82,9 @@ const DELETE_CASE = "Delete Case";
 const EDIT = "Edit";
 const CHANGE_PASSWORD = "Change Password";
 const MARK_DELIVERED = "Mark Delivered";
-
+const DROP_CASE = "Drop case";
+const SCHEDULE_LATER = "Schedule later";
+const VIEW_CASE = "View case";
 const CUSTOMER_DETAILS = "Customer Details";
 const TEMP = "TEMP-06-99-B";
 
@@ -101,6 +103,10 @@ const BRANCH_NAME = "Branch Name";
 const BRANCH_CODE = "Branch Code";
 const USER_ID = "User ID";
 const DEPARTMENT = "Department";
+const CASE_PUNCHED_ON = "Case Punched On:";
+const LAST_CALL_ON = "Last Call On:";
+
+
 
 const COPYRIGHT_POPULAR_MOTORS = "© Popular Motors";
 
