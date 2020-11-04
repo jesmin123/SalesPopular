@@ -33,27 +33,25 @@ class _FollowUpWidgetState extends State<FollowUpWidget> {
         ),
         Divider(),
         ListTile(
-          title: Text(CASE_PUNCHED_ON, style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR)),
-          trailing: Text("11 OCT 2020", style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR)),
+          title: Text(CASE_PUNCHED_ON, style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR)),
+          trailing: Text("11 OCT 2020", style: AppFontStyle.regularTextStyle4(APP_BLACK_COLOR)),
         ),
         ListTile(
           title: Padding(
             padding: const EdgeInsets.only(bottom: 32),
-            child: Text(LAST_CALL_ON, style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR)),
+            child: Text(LAST_CALL_ON, style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR)),
           ),
           trailing: Padding(
             padding: const EdgeInsets.only(bottom: 32),
-            child: Text("18 OCT 2020", style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR)),
+            child: Text("18 OCT 2020", style: AppFontStyle.regularTextStyle4(APP_BLACK_COLOR)),
           ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(LineIcons.trash_o, color: APP_RED_COLOR, size: ICON_SIZE,),
-            Text(DELETE_CASE, style: AppFontStyle.bodyTextStyle(APP_RED_COLOR),),
-            SizedBox(width: LINE_HEIGHT,),
-            Icon(LineIcons.clock_o, color: APP_RED_COLOR, size: 20,),
-            Text(SCHEDULE_LATER, style: AppFontStyle.regularTextStyle3(APP_RED_COLOR),),
+            Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(LineIcons.trash_o, color: APP_RED_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(DROP_CASE, style: AppFontStyle.regularTextStyle4(APP_RED_COLOR),))],), color: APP_WHITE_COLOR,textColor: APP_RED_COLOR,),flex: 1),
+            Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.access_alarm, color: APP_MAGANTA_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(POSTPONE,style: AppFontStyle.regularTextStyle4(APP_MAGANTA_COLOR),))],),color: APP_WHITE_COLOR,textColor: APP_MAGANTA_COLOR,),flex: 1),
+            Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.drag_indicator, color: APP_GREEN_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(DROP_CASE, style: AppFontStyle.regularTextStyle4(APP_GREEN_COLOR),))],),color: APP_WHITE_COLOR,textColor: APP_GREEN_COLOR,),flex: 1)
           ],
         ),
       ],

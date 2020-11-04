@@ -52,13 +52,14 @@ class _NewEnquiryPageState extends State<NewEnquiryPage> {
           child: FAStepper(
               type: FAStepperType.horizontal,
               titleHeight: 120,
-              currentStep: 3,
+              currentStep: formData.stepCount,
+              onStepTapped: (val)=>changeStep(val, formData),
               titleIconArrange: FAStepperTitleIconArrange.row,
               steps:[
-                  FAStep(state: FAStepstate.complete, title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),textAlign: TextAlign.center,), content: CustomerDetailEntryForm(formData,enquiryProvider),),
-                  FAStep(state: FAStepstate.complete, title: Text(NEW_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: NewCarDetailEntryForm(formData,enquiryProvider), ),
-                  FAStep(state: FAStepstate.complete, title: Text(OLD_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: OldCarDetailEntryForm(formData,enquiryProvider), isActive: true,),
-                  FAStep(state: FAStepstate.complete, title: Text(BOOKING_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: BookingDetailEntryForm(formData,enquiryProvider), isActive: true,)
+                  FAStep(state: FAStepstate.complete, title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),textAlign: TextAlign.center,), content: CustomerDetailEntryForm(formData,enquiryProvider),isActive: formData.stepCount==0),
+                  FAStep(state: FAStepstate.editing, title: Text(NEW_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: NewCarDetailEntryForm(formData,enquiryProvider),isActive: formData.stepCount==1 ),
+                  FAStep(state: FAStepstate.editing, title: Text(OLD_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: OldCarDetailEntryForm(formData,enquiryProvider), isActive: formData.stepCount==2,),
+                  FAStep(state: FAStepstate.editing, title: Text(BOOKING_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: BookingDetailEntryForm(formData,enquiryProvider), isActive: formData.stepCount==3,)
               ],
             controlsBuilder: (BuildContext context,
                 {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
@@ -69,8 +70,8 @@ class _NewEnquiryPageState extends State<NewEnquiryPage> {
     );
   }
 
-  void changeStep(int value, EnquiryProvider enquiryProvider) {
-    enquiryProvider.stepNo = value;
+  void changeStep(int value, FormData formData) {
+    formData.stepCount = value;
   }
 }
 

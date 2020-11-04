@@ -8,6 +8,8 @@ const ALL_ENQUIRY_PAGE = "allEnquiryPage";
 const MY_PROFILE = "myProfilePage";
 const DELIVERY_PAGE = 'DeliveryPage';
 const FOLLOW_UP_PAGE = 'FollowUpPage';
+const SALES_APP_PAGE = 'SalesAppPage';
+const CHANGE_PASSWORD_PAGE = "ChangePasswordPage";
 
 
 
@@ -55,6 +57,10 @@ const EVALUATOR_BRANCH = "Evaluator Branch";
 const EVALUATOR_NAME = "Evaluator Name";
 const SALES_EXECUTIVE = "Sales Executive";
 const PAYMENT_TYPE = "Payment Type";
+const PASSWORD = "Password";
+const NEW_PASSWORD = "New Password";
+const CONFORM_PASSWORD = "Conform Password";
+
 
 
 // label texts
@@ -69,6 +75,9 @@ const ADDRESS_LINE_2 = "Address line 2";
 const ADDRESS_AREA = "Address Area";
 const REMARKS = "Remarks";
 const AMOUNT = "Amount";
+const VIEW_DELIVERY = "View Delivery";
+const VIEW_FOLLOW_UP = "View Follow Up";
+const FORGOT = "Forgot";
 
 
 // button texts
@@ -84,9 +93,11 @@ const CHANGE_PASSWORD = "Change Password";
 const MARK_DELIVERED = "Mark Delivered";
 const DROP_CASE = "Drop case";
 const SCHEDULE_LATER = "Schedule later";
+const POSTPONE = "Postpone";
 const VIEW_CASE = "View case";
 const CUSTOMER_DETAILS = "Customer Details";
 const TEMP = "TEMP-06-99-B";
+const ADD_NEW = "Add New";
 
 // texts
 
@@ -105,6 +116,8 @@ const USER_ID = "User ID";
 const DEPARTMENT = "Department";
 const CASE_PUNCHED_ON = "Case Punched On:";
 const LAST_CALL_ON = "Last Call On:";
+const CASES = "Cases";
+const TOTAL = "Total";
 
 
 

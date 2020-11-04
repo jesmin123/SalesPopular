@@ -228,9 +228,8 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
                 underline: Container(),
                 hint: Text(STATE, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR)),
                 icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-
                 items: widget._formData.states.map((e){
-                  return DropdownMenuItem(child: Text(e),value: e,);
+                  return DropdownMenuItem(child: Text(e),value: e,onTap: ()=>widget._formData.selectedStates=e,);
                 }).toList(),
                 onChanged: onCustomerTypeChanged
             ),

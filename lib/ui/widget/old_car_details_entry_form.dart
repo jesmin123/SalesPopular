@@ -81,7 +81,7 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
                   hint: Text(VARIANT,
                     style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
                   icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.variant.map((e) {
+                  items: widget._formData.carVariant.map((e) {
                     return DropdownMenuItem(child: Text(e), value: e,);
                   }).toList(),
                   onChanged: onCarMakeTypeChanged
@@ -100,7 +100,7 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
                   hint: Text(
                     COLOUR, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
                   icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.color.map((e) {
+                  items: widget._formData.carColor.map((e) {
                     return DropdownMenuItem(child: Text(e), value: e,);
                   }).toList(),
                   onChanged: onCarMakeTypeChanged

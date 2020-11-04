@@ -35,7 +35,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm>{
           hint: Text(CAR_MAKE, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
           icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
           items: widget._formData.carMake.map((e){
-            return DropdownMenuItem(child: Text(e),value: e,);
+            return DropdownMenuItem(child: Text(e), value: e,onTap: ()=>widget._formData.selectedCarMake=e,);
           }).toList(),
     onChanged: onCarMakeTypeChanged
       ),
@@ -64,7 +64,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm>{
                   underline: Container(),
                   hint: Text(VARIANT, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
                   icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.variant.map((e){
+                  items: widget._formData.carVariant.map((e){
                     return DropdownMenuItem(child: Text(e),value: e,);
                   }).toList(),
                   onChanged: onCarMakeTypeChanged
@@ -79,7 +79,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm>{
                   underline: Container(),
                   hint: Text(COLOUR, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
                   icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.color.map((e){
+                  items: widget._formData.carColor.map((e){
                     return DropdownMenuItem(child: Text(e),value: e,);
                   }).toList(),
                   onChanged: onCarMakeTypeChanged
@@ -197,6 +197,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm>{
               decoration: AppBorderStyle.appFormBorder(),
               child: DropdownButton(
                   underline: Container(),
+
                   hint: Text(TEST_DRIVE_TIME, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
                   icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
                   items: widget._formData.testDriveTime.map((e){
