@@ -65,7 +65,9 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm>{
                   hint: Text(VARIANT, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
                   icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
                   items: widget._formData.carVariant.map((e){
-                    return DropdownMenuItem(child: Text(e),value: e,);
+                    String variant = e['carVariant'];
+                    print(variant);
+                    return DropdownMenuItem(child: Text(variant),value:variant,);
                   }).toList(),
                   onChanged: onCarMakeTypeChanged
               ),

@@ -161,10 +161,10 @@ class FormData extends ChangeNotifier{
 
 
 
-    List<String> _carVariant = new List();
-    List<String> get carVariant => _carVariant;
+    List<Map<String,String>> _carVariant = new List();
+    List<Map<String,String>> get carVariant => _carVariant;
 
-    set carVariant(List<String> value) {
+    set carVariant(List<Map<String,dynamic>> value) {
       _carVariant = value;
       notifyListeners();
     }
@@ -355,7 +355,7 @@ class FormData extends ChangeNotifier{
   void getCarModel() {
       api.getData('getcarmodels').then((value){
         if(value.status){
-          carModel = new List<String>.from(value.data[0]['carModels']);
+          carModel = new List<String>.from(value.data['carModels']);
         }
       });
   }
@@ -363,7 +363,7 @@ class FormData extends ChangeNotifier{
   void getCarVariant() {
       api.getData('getcarvariants').then((value){
        if(value.status){
-         carVariant = new List<String>.from(value.data[0]['carVariants']);
+         carVariant = new List<Map<String,dynamic>>.from(value.data['carVariants']);
        }
       }
       );
