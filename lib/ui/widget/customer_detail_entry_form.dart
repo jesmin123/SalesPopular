@@ -53,14 +53,14 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
             padding: EdgeInsets.all(4),
             width: MediaQuery.of(context).size.width,
             decoration: AppBorderStyle.appFormBorder(),
-            child: DropdownButton(
-                underline: Container(),
+            child: DropdownButtonFormField(
+
                 hint: Text(SELECT_CUSTOMER_TYPE, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
                 icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
                 items: widget._formData.customerType.map((e){
-                  return DropdownMenuItem(child: Text(e),value: e,);
+                  return DropdownMenuItem<String>(child: Text(e),value: e,);
                 }).toList(),
-                onChanged: onCustomerTypeChanged
+                onChanged: (val){}
             ),
           ),
           SizedBox(height: LINE_HEIGHT,),
@@ -68,8 +68,12 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
             padding: EdgeInsets.all(4),
             width: MediaQuery.of(context).size.width,
             decoration: AppBorderStyle.appFormBorder(),
-            child: DropdownButton(
-                underline: Container(),
+            child: DropdownButtonFormField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+
+                )
+              ),
                 hint: Text(SELECT_SALUTATIONS, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR)),
                 icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
                 items: widget._formData.salutations.map((e){
