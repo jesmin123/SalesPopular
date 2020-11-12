@@ -37,7 +37,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm>{
           items: widget._formData.carMake.map((e){
             return DropdownMenuItem(child: Text(e),value: e,);
           }).toList(),
-    onChanged: onCarMakeTypeChanged
+          onChanged: onCarMakeTypeChanged
       ),
     ),
             SizedBox(height: LINE_HEIGHT,),
@@ -202,7 +202,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm>{
                   items: widget._formData.testDriveTime.map((e){
                     return DropdownMenuItem(child: Text(e),value: e,);
                   }).toList(),
-                  onChanged: onCarMakeTypeChanged
+                  onChanged: (e){}
               ),
             ),
             SizedBox(height: LINE_HEIGHT,),
@@ -230,5 +230,4 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm>{
 }
 
 void onCarMakeTypeChanged(value) {
-
 }
