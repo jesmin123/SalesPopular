@@ -22,7 +22,7 @@ class ApiUtils {
         return RespObj(true,data: jsonDecode(response.body));
       }else{
         return RespObj(false,msg: response.body);
-      }
+  }
     }catch(ex){
       print("Exception e :"+ex.toString());
       return RespObj(false,msg: 'Server Unavailable');

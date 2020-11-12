@@ -228,10 +228,12 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
                 underline: Container(),
                 hint: Text(STATE, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR)),
                 icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-
                 items: widget._formData.states.map((e){
-                  return DropdownMenuItem(child: Text(e),value: e,);
+                  return DropdownMenuItem(child: Text(e),value: e,onTap: ()=>widget._formData.selectedStates=e,);
                 }).toList(),
+
+
+
                 onChanged: onCustomerTypeChanged
             ),
           ),
@@ -239,6 +241,8 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
           ButtonTheme(minWidth: MediaQuery.of(context).size.width-128, child: RaisedButton(elevation: 2, onPressed: (){}, color: PRIMARY_COLOR, child: Text(SAVE, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR)), shape: AppBorderStyle.appButtonShape(),))
         ],
       ),
+
+
     );
   }
 

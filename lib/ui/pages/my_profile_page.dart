@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
@@ -43,25 +44,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: SingleChildScrollView(
-                child: userDataProvider.isLoading?Visibility(child: CircularProgressIndicator()):Column(
+                child: userDataProvider.isLoading?Visibility(child: CircularProgressIndicator()):
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: LINE_HEIGHT,),
                     CircleAvatar(backgroundImage: CachedNetworkImageProvider('https://www.adbasis.com/images/divita-a65623c8.jpg'), maxRadius: CIRCLE_AVATAR_RADIUS,),
                     SizedBox(height: LINE_HEIGHT,),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(PERSONAL_DETAILS, style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR),),
-                        InkWell(
-                          onTap: ()=>onItemPressed(),
-                          child: Row(
-                            children: [
-                              Icon(LineIcons.edit, size: ICON_SIZE_EDIT,),
-                              Text(EDIT, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR),)
-                            ],
-                          ),
-                        )
                       ],
                     ),
                     SizedBox(height: LINE_HEIGHT,),
@@ -89,15 +82,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(BRANCH_DETAILS, style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR),),
-                        InkWell(
-                          onTap: ()=>onItemPressed(),
-                          child: Row(
-                            children: [
-                              Icon(LineIcons.edit, size: ICON_SIZE_EDIT,),
-                              Text(EDIT, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR),)
-                            ],
-                          ),
-                        )
                       ],
                     ),
                     SizedBox(height: LINE_HEIGHT,),
@@ -121,12 +105,72 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       subtitle: Text(userDataProvider.userData.getDepartment(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
                     ),
                     SizedBox(height: LINE_HEIGHT,),
-                    Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4),border: Border.all(width: .6,color:APP_RED_COLOR )),
-                      child: ListTile(
-                        trailing: Icon(LineIcons.key,color: Colors.red,),
-                        title: Text(CHANGE_PASSWORD, style: AppFontStyle.regularTextStyle2(APP_RED_COLOR,)),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, CHANGE_PASSWORD_PAGE);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(4),border: Border.all(width: .6,color:APP_RED_COLOR )),
+                        child: ListTile(
+                          trailing: Icon(LineIcons.key,color: Colors.red,),
+                          title: Text(CHANGE_PASSWORD, style: AppFontStyle.regularTextStyle2(APP_RED_COLOR,)),
+                        ),
                       ),
+                    ),
+                    Divider(),
+                    Container(
+                      width: 180,
+                      child: RaisedButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context){
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                                  title: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text("Loging Out", style: AppFontStyle.headingTextStyle(APP_BLACK_COLOR),),
+                                      SizedBox(height: LINE_HEIGHT*0.5,),
+                                      Text("Are you sure you want to log out?", style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR), textAlign: TextAlign.center,),
+                                      Divider(),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          FlatButton(
+                                              onPressed: (){
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text("Cancel", style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),)
+                                          ),
+                                          VerticalDivider(width: 25,thickness: 16,),
+                                          FlatButton(
+                                              onPressed: (){
+                                                Navigator.pushNamed(context, LOGIN_PAGE);
+                                              },
+                                              child: Text("Yes", style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),)
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
+                          );
+                          },
+                        color: PRIMARY_COLOR,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("Log Out", style: AppFontStyle.labelTextStyle(APP_WHITE_COLOR)),
+                            SizedBox(width: LINE_HEIGHT*0.4,),
+                            Icon(Icons.logout, color: APP_WHITE_COLOR, size: 18,)
+                          ],
+                        ),
+                      ),
+
                     ),
                     SizedBox(height: LINE_HEIGHT*4,),
                     Text(COPYRIGHT_POPULAR_MOTORS, style: AppFontStyle.bodyTextStyle(APP_GREY_COLOR),)
