@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
@@ -8,6 +9,7 @@ import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class NewCarDetailEntryForm extends StatefulWidget {
   final FormData _formData;
@@ -20,13 +22,36 @@ class NewCarDetailEntryForm extends StatefulWidget {
 }
 
 class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
+
+  TextEditingController _followUpDateController =TextEditingController();
+  TextEditingController _followUpTimeController = TextEditingController();
+  TextEditingController _scheduleCallOnController = TextEditingController();
+  TextEditingController _testDriveDateController = TextEditingController();
+  TextEditingController _testDriveTimeController = TextEditingController();
+  _NewCarDetailEntryFormState(){
+    _followUpDateController = TextEditingController();
+    _followUpTimeController = TextEditingController();
+    _scheduleCallOnController = TextEditingController();
+    _testDriveDateController = TextEditingController();
+    _testDriveTimeController = TextEditingController();
+}
+
+  final _formKey = GlobalKey<FormState>();
+  final singleValidator = MultiValidator([
+    RequiredValidator(errorText: 'this field is required'),
+  ]);
+
+
+
   @override
   Widget build(BuildContext context) {
     final FormData formData = Provider.of(context);
     return Form(
+      key: _formKey,
         child: Column(
       children: [
         DropdownButtonFormField(
+            validator: (value) => value == null ? 'this field is required' : null,
             decoration:
                 InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
             hint: Text(
@@ -47,6 +72,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
           height: LINE_HEIGHT,
         ),
         DropdownButtonFormField(
+            validator: (value) => value == null ? 'this field is required' : null,
             decoration:
             InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
             hint: Text(
@@ -65,6 +91,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
           height: LINE_HEIGHT,
         ),
         DropdownButtonFormField(
+            validator: (value) => value == null ? 'this field is required' : null,
             decoration:
                 InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
             hint: Text(
@@ -77,8 +104,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
             ),
             items: widget._formData.carVariant.map((e) {
               String variant = e['carVariant'];
-              print(variant);
-              return DropdownMenuItem(child: Text(variant), value: variant);
+              return DropdownMenuItem(child: Text(variant,overflow: TextOverflow.fade,), value: variant);
             }).toList(),
             onChanged: (variant){formData.selectedVariant=variant;}
         ),
@@ -86,22 +112,30 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
           height: LINE_HEIGHT,
         ),
         DropdownButtonFormField(
+            validator: (value) => value == null ? 'this field is required' : null,
             decoration:
-            InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+            InputDecoration(enabledBorder: AppBorderStyle.getFormBorder(),),
             hint: Text(
-              COLOUR,
-              style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
-            ),
+                     COLOUR,
+                     overflow: TextOverflow.fade,
+                     style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
+         ),
             icon: Icon(
               Icons.keyboard_arrow_down,
               color: PRIMARY_COLOR,
             ),
             items: widget._formData.carColor.map((e) {
+              String val = e;
+              if(val.length>20){
+                val = val.substring(0,20);
+              }
               return DropdownMenuItem(
-                child: Text(e['carColour']), value: e['carColour'],
+                child: Text(val,overflow: TextOverflow.fade,), value: e,
               );
             }).toList(),
-            onChanged: onCarMakeTypeChanged),
+            onChanged: (e){formData.selectedCarColor= e;}
+
+        ),
         SizedBox(
           height: LINE_HEIGHT,
         ),
@@ -114,30 +148,26 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
         SizedBox(
           height: LINE_HEIGHT,
         ),
-        Container(
-          padding: EdgeInsets.all(4),
-          width: MediaQuery.of(context).size.width,
-          decoration: AppBorderStyle.appFormBorder(),
-          child: DropdownButton(
-              underline: Container(),
-              hint: Text(
-                LIKELY_TO_PURCHASE_WITHIN,
-                style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
-              ),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: PRIMARY_COLOR,
-              ),
-              items: widget._formData.likelyToPurchaseWithin.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e),
-                  value: e,
-                );
-              }).toList(),
-              onChanged: (e) {
-                formData.selectedVariant = e;
-              }),
-        ),
+        DropdownButtonFormField(
+            validator: (value) => value == null ? 'this field is required' : null,
+          decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+            hint: Text(
+              LIKELY_TO_PURCHASE_WITHIN,
+              style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
+            ),
+            icon: Icon(
+              Icons.keyboard_arrow_down,
+              color: PRIMARY_COLOR,
+            ),
+            items: widget._formData.likelyToPurchaseWithin.map((e) {
+              return DropdownMenuItem(
+                child: Text(e),
+                value: e,
+              );
+            }).toList(),
+            onChanged: (e) {
+              formData.selectedVariant = e;
+            }),
         SizedBox(
           height: LINE_HEIGHT,
         ),
@@ -152,102 +182,83 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
         SizedBox(
           height: LINE_HEIGHT,
         ),
-        Container(
-          padding: EdgeInsets.all(4),
-          width: MediaQuery.of(context).size.width,
-          decoration: AppBorderStyle.appFormBorder(),
-          child: DropdownButton(
-              underline: Container(),
-              hint: Text(
-                FOLLOW_UP_DATE,
-                style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
-              ),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: PRIMARY_COLOR,
-              ),
-              items: widget._formData.followUpDate.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e),
-                  value: e,
-                );
-              }).toList(),
-              onChanged: onCarMakeTypeChanged),
+        TextFormField(
+          validator: singleValidator,
+          controller: _followUpDateController,
+          autofocus: false,
+          decoration: InputDecoration(
+            labelText: FOLLOW_UP_DATE+ '*',
+            labelStyle: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
+            enabledBorder: AppBorderStyle.getFormBorder(),
+            focusedBorder: AppBorderStyle.getFormBorder(color: PRIMARY_COLOR),
+          ),
+          onTap: () async{
+            DateTime date = DateTime(1900);
+            FocusScope.of(context).requestFocus(new FocusNode());
+            DateTime dt = await showMDatePicker();
+            _followUpDateController.text = dt.toIso8601String().substring(0,10);
+          },),
+        SizedBox(
+          height: LINE_HEIGHT,
+        ),
+        TextFormField(
+          validator: singleValidator,
+          controller: _followUpTimeController,
+          onTap: () async {
+            TimeOfDay selectedTime = await showTimePicker(
+              initialTime: TimeOfDay.now(),
+              context: context,
+            );
+            _followUpTimeController.text = selectedTime.format(context);
+          },
+          autofocus: false,
+          decoration: InputDecoration(
+            labelText: FOLLOW_UP_TIME+ '*',
+            labelStyle: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
+            enabledBorder: AppBorderStyle.getFormBorder(),
+            focusedBorder: AppBorderStyle.getFormBorder(color: PRIMARY_COLOR),
+          ),
         ),
         SizedBox(
           height: LINE_HEIGHT,
         ),
-        Container(
-          padding: EdgeInsets.all(4),
-          width: MediaQuery.of(context).size.width,
-          decoration: AppBorderStyle.appFormBorder(),
-          child: DropdownButton(
-              underline: Container(),
-              hint: Text(
-                FOLLOW_UP_TIME,
-                style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
-              ),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: PRIMARY_COLOR,
-              ),
-              items: widget._formData.followUpTime.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e),
-                  value: e,
-                );
-              }).toList(),
-              onChanged: onCarMakeTypeChanged),
-        ),
+        TextFormField(
+          validator: singleValidator,
+          controller: _scheduleCallOnController,
+          autofocus: false,
+          decoration: InputDecoration(
+            labelText: SCHEDULE_CALL_ON+ '*',
+            labelStyle: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
+            enabledBorder: AppBorderStyle.getFormBorder(),
+            focusedBorder: AppBorderStyle.getFormBorder(color: PRIMARY_COLOR),
+          ),
+          onTap: () async{
+            DateTime date = DateTime(1900);
+            FocusScope.of(context).requestFocus(new FocusNode());
+            DateTime dt = await showMDatePicker();
+            _scheduleCallOnController.text = dt.toIso8601String().substring(0,10);
+          },),
         SizedBox(
           height: LINE_HEIGHT,
         ),
-        Container(
-          padding: EdgeInsets.all(4),
-          width: MediaQuery.of(context).size.width,
-          decoration: AppBorderStyle.appFormBorder(),
-          child: DropdownButton(
-              underline: Container(),
-              hint: Text(
-                SCHEDULE_CALL_ON,
-                style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
-              ),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: PRIMARY_COLOR,
-              ),
-              items: widget._formData.scheduleCallOn.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e),
-                  value: e,
-                );
-              }).toList(),
-              onChanged: onCarMakeTypeChanged),
-        ),
-        SizedBox(
-          height: LINE_HEIGHT,
-        ),
-        Container(
-          padding: EdgeInsets.all(4),
-          width: MediaQuery.of(context).size.width,
-          decoration: AppBorderStyle.appFormBorder(),
-          child: DropdownButton(
-              underline: Container(),
-              hint: Text(
-                ASSIGN_TO_BRANCH,
-                style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
-              ),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: PRIMARY_COLOR,
-              ),
-              items: widget._formData.assignToBranch.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e),
-                  value: e,
-                );
-              }).toList(),
-              onChanged: onCarMakeTypeChanged),
+        DropdownButtonFormField(
+            validator: (value) => value == null ? 'this field is required' : null,
+            decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+            hint: Text(
+              ASSIGN_TO_BRANCH,
+              style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
+            ),
+            icon: Icon(
+              Icons.keyboard_arrow_down,
+              color: PRIMARY_COLOR,
+            ),
+            items: widget._formData.assignToBranch.map((e) {
+              return DropdownMenuItem(
+                child: Text(e),
+                value: e,
+              );
+            }).toList(),
+            onChanged: (value){formData.selectedBranch = value;}
         ),
         SizedBox(
           height: LINE_HEIGHT,
@@ -255,8 +266,8 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
         Row(
           children: [
             Checkbox(
-              value: true,
-              onChanged: (value) => enabledTestDrive(value),
+              value: formData.isTestDrive,
+              onChanged: (value) => formData.isTestDrive = value,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             Text(
@@ -268,52 +279,42 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
         SizedBox(
           height: LINE_HEIGHT,
         ),
-        Container(
-          padding: EdgeInsets.all(4),
-          width: MediaQuery.of(context).size.width,
-          decoration: AppBorderStyle.appFormBorder(),
-          child: DropdownButton(
-              underline: Container(),
-              hint: Text(
-                TEST_DRIVE_DATE,
-                style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
-              ),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: PRIMARY_COLOR,
-              ),
-              items: widget._formData.testDriveDate.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e),
-                  value: e,
-                );
-              }).toList(),
-              onChanged: onCarMakeTypeChanged),
-        ),
+        TextFormField(
+          validator: singleValidator,
+          controller: _testDriveDateController,
+          autofocus: false,
+          decoration: InputDecoration(
+            labelText: TEST_DRIVE_DATE+ '*',
+            labelStyle: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
+            enabledBorder: AppBorderStyle.getFormBorder(),
+            focusedBorder: AppBorderStyle.getFormBorder(color: PRIMARY_COLOR),
+          ),
+          onTap: () async{
+            DateTime date = DateTime(1900);
+            FocusScope.of(context).requestFocus(new FocusNode());
+            DateTime dt = await showMDatePicker();
+            _testDriveDateController.text = dt.toIso8601String().substring(0,10);
+          },),
         SizedBox(
           height: LINE_HEIGHT,
         ),
-        Container(
-          padding: EdgeInsets.all(4),
-          width: MediaQuery.of(context).size.width,
-          decoration: AppBorderStyle.appFormBorder(),
-          child: DropdownButton(
-              underline: Container(),
-              hint: Text(
-                TEST_DRIVE_TIME,
-                style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
-              ),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: PRIMARY_COLOR,
-              ),
-              items: widget._formData.testDriveTime.map((e) {
-                return DropdownMenuItem(
-                  child: Text(e),
-                  value: e,
-                );
-              }).toList(),
-              onChanged: (e) {}),
+        TextFormField(
+          validator: singleValidator,
+          controller: _testDriveTimeController,
+          onTap: () async {
+            TimeOfDay selectedTime = await showTimePicker(
+              initialTime: TimeOfDay.now(),
+              context: context,
+            );
+            _testDriveTimeController.text = selectedTime.format(context);
+          },
+          autofocus: false,
+          decoration: InputDecoration(
+            labelText: TEST_DRIVE_TIME+ '*',
+            labelStyle: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
+            enabledBorder: AppBorderStyle.getFormBorder(),
+            focusedBorder: AppBorderStyle.getFormBorder(color: PRIMARY_COLOR),
+          ),
         ),
         SizedBox(
           height: LINE_HEIGHT,
@@ -321,7 +322,9 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
         ButtonTheme(
           minWidth: MediaQuery.of(context).size.width - 128,
           child: RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (_formKey.currentState.validate()){formData.activeStep=2;formData.stepCount=2;}
+            },
             color: PRIMARY_COLOR,
             shape: AppBorderStyle.appButtonShape(),
             child: Row(
@@ -348,6 +351,17 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
   }
 
   enabledTestDrive(bool value) {}
+
+
+    Future<DateTime> showMDatePicker() async {
+    DateTime date = await showDatePicker(
+    context: context,
+    initialDate:DateTime.now(),
+    firstDate:DateTime(1900),
+    lastDate: DateTime(2100));
+
+    return date!=null?date:DateTime.now();
+    }
 }
 
 void onCarMakeTypeChanged(value) {}

@@ -13,6 +13,16 @@ class FormData extends ChangeNotifier {
     getCarModel();
     getCarVariant();
     getCarColor();
+    getAssignToBranch();
+  }
+
+  int _activeStep = 0;
+
+  int get activeStep => _activeStep;
+
+  set activeStep(int value) {
+    _activeStep = value;
+    notifyListeners();
   }
 
   List<String> _customerType = new List();
@@ -41,30 +51,43 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> _villages = new List();
-  List<String> get villages => _villages;
+  List<Map<String, dynamic>> _villages = new List();
+  List<Map<String, dynamic>> get villages => _villages;
+  String selectedVillages;
 
-  set villages(List<String> value) {
+  set villages(List<Map<String, dynamic>> value) {
     _villages = value;
     notifyListeners();
   }
 
-  List<String> _taluks = new List();
-  List<String> get taluks => _taluks;
+  String selectedTaluk;
+  List<dynamic> _taluks = new List();
+  List<dynamic> get taluks{
+    List taluks = new List();
+    _taluks.forEach((element) {
+      taluks.add(element['taluk']);
+    });
+    return [
+      ...{...taluks}
+    ];
+  }
 
-  set taluks(List<String> value) {
+
+  set taluks(List<dynamic> value) {
     _taluks = value;
     notifyListeners();
   }
 
-  List<String> _districts = new List();
-  List<String> get districts => _districts;
+  String selectedDistrict;
+  List<Map<String, dynamic>> _districts = new List();
+  List<Map<String, dynamic>> get districts => _districts;
 
-  set districts(List<String> value) {
+  set districts(List<Map<String, dynamic>> value) {
     _districts = value;
-    notifyListeners();
   }
 
+
+  String selectedState;
   List<String> _states = new List();
   List<String> get states => _states;
 
@@ -95,6 +118,7 @@ class FormData extends ChangeNotifier {
 
   List<String> _salutations = new List();
   List<String> get salutations => _salutations;
+  String selectedSalutations;
 
   set salutations(List<String> value) {
     _salutations = value;
@@ -158,18 +182,27 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Map<String, dynamic>> _carColor = new List();
+  List< dynamic> _carColor = new List();
 
+  List<dynamic> get carColor {
+    List carColours = new List();
+    _carColor.forEach((element) {
+      carColours.add(element['carColour']);
+    });
+    return [
+      ...{...carColours}
+    ];
+  }
 
-  List<Map<String, dynamic>> get carColor => _carColor;
-
-  set carColor(List<Map<String, dynamic>> value) {
+  String selectedCarColor;
+  set carColor(List<dynamic> value) {
     _carColor = value;
   }
 
-  List<String> _likelyToPurchaseWithin = new List();
+  List<String> _likelyToPurchaseWithin =  ["0 - 10 Days", "10 - 20 Days", "20 - 30 Days", "30 - 40 Days" ];
 
   List<String> get likelyToPurchaseWithin => _likelyToPurchaseWithin;
+  String selectedLikelyToPurchaseWithin;
 
   set likelyToPurchaseWithin(List<String> value) {
     _likelyToPurchaseWithin = value;
@@ -200,6 +233,7 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
+  String selectedBranch;
   List<String> _assignToBranch = new List();
   List<String> get assignToBranch => _assignToBranch;
 
@@ -275,6 +309,14 @@ class FormData extends ChangeNotifier {
     _isSalutationLoading = value;
     notifyListeners();
   }
+  bool _isTestDrive =  false;
+
+  bool get isTestDrive => _isTestDrive;
+
+  set isTestDrive(bool value) {
+    _isTestDrive = value;
+    notifyListeners();
+  }
 
   bool get isStatesLoading => _isStatesLoading;
 
@@ -293,17 +335,23 @@ class FormData extends ChangeNotifier {
   void getVillage() {
     api.getData('getvillages').then((value) {
       if (value.status) {
-        villages = new List<String>.from(value.data[0]['villages']);
+        villages = new List<Map<String, dynamic>>.from(value.data['villages']);
       }
     });
   }
 
-  void getTaluk() {}
+  void getTaluk() {
+    api.getData('gettalukas').then((value){
+      if(value.status){
+        taluks = new List<dynamic>.from(value.data['talukas']);
+      }
+    });
+  }
 
   void getDistrict() {
     api.getData('getdistricts').then((value) {
       if (value.status) {
-        districts = new List<String>.from(value.data[0]['districts']);
+        districts = new List<Map<String, dynamic>>.from(value.data['districts']);
       }
     });
   }
@@ -329,8 +377,18 @@ class FormData extends ChangeNotifier {
   void getCarColor() {
     api.getData('getcarcolours').then((value){
       if(value.status){
-        carColor = new List<Map<String, dynamic>>.from(value.data['carColours']);
+        print(value.data.toString());
+        carColor = new List<dynamic>.from(value.data['carColours']);
+      }
+    });
+  }
+
+  void getAssignToBranch() {
+    api.getData('getbranches').then((value){
+      if(value.status){
+        assignToBranch = new List<String>.from(value.data[0]['branch']);
       }
     });
   }
 }
+

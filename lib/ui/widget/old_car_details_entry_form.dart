@@ -101,7 +101,11 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
                     COLOUR, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
                   icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
                   items: widget._formData.carColor.map((e) {
-                    return DropdownMenuItem(child: Text(e['carColour']), value: e['carColour'],);
+                    String val = e;
+                    if(val.length>20){
+                      val = val.substring(0,20);
+                    }
+                    return DropdownMenuItem(child: Text(val), value: e);
                   }).toList(),
                   onChanged: onCarMakeTypeChanged
               ),
