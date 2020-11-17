@@ -14,6 +14,12 @@ class FormData extends ChangeNotifier {
     getCarVariant();
     getCarColor();
     getAssignToBranch();
+    getExchangeCarMakes();
+    getExchangeCarModels();
+    getExchangeCarVariants();
+    getExchangeCarColours();
+    getExchangeCarEvaluators();
+    getPaymentTypes();
   }
 
   int _activeStep = 0;
@@ -25,6 +31,26 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  String selectedExchangeCarMakes;
+  List<String> _exchangeCarMakes = new List();
+  List<String> get exchangeCarMakes => _exchangeCarMakes;
+
+  set exchangeCarMakes(List<String> value) {
+    _exchangeCarMakes = value;
+    notifyListeners();
+  }
+
+  String selectedExchaneCarModels;
+  List<dynamic> _exchangeCarModels = new List();
+
+
+  List<dynamic> get exchangeCarModels => _exchangeCarModels;
+
+  set exchangeCarModels(List<dynamic> value) {
+    _exchangeCarModels = value;
+  }
+
   List<String> _customerType = new List();
   List<String> get customerType => _customerType;
   String selectedCustomerType;
@@ -34,6 +60,17 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  String selectedExchangeCarVariants;
+  List<dynamic> _exchangeCarVariants = new List();
+
+
+  List<dynamic> get exchangeCarVariants => _exchangeCarVariants;
+
+  set exchangeCarVariants(List<dynamic> value) {
+    _exchangeCarVariants = value;
+  }
+
   void getCustomerType() {
     isCustomerTypeLoading = true;
     api.getData('getcustomertypes').then((value) {
@@ -41,6 +78,33 @@ class FormData extends ChangeNotifier {
         customerType = new List<String>.from(value.data[0]['customerType']);
       }
     });
+  }
+
+  String selectedExchangeCarColours;
+  List<dynamic> _exchangeCarColours = new List();
+
+
+  List<dynamic> get exchangeCarColours => _exchangeCarColours;
+
+  set exchangeCarColours(List<dynamic> value) {
+    _exchangeCarColours = value;
+  }
+
+  String _selectedExchangeCarEvaluators;
+  List<String> _exchangeCarEvaluators = new List();
+
+
+  String get selectedExchangeCarEvaluators => _selectedExchangeCarEvaluators;
+
+  set selectedExchangeCarEvaluators(String value) {
+    _selectedExchangeCarEvaluators = value;
+    notifyListeners();
+  }
+
+  List<String> get exchangeCarEvaluators => _exchangeCarEvaluators;
+
+  set exchangeCarEvaluators(List<String> value) {
+    _exchangeCarEvaluators = value;
   }
 
   int _stepCount = 0;
@@ -258,23 +322,9 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> _evaluatorBranch = new List();
-  List<String> get evaluatorBranch => _evaluatorBranch;
 
-  set evaluatorBranch(List<String> value) {
-    _evaluatorBranch = value;
-    notifyListeners();
-  }
-
-  List<String> _evaluatorName = new List();
-  List<String> get evaluatorName => _evaluatorName;
-
-  set evaluatorName(List<String> value) {
-    _evaluatorName = value;
-    notifyListeners();
-  }
-
-  List<String> _salesExecutive = new List();
+  String selectedSalesExecutive;
+  List<String> _salesExecutive = ['Bartoz Biby', 'jonas Biby', 'Aby thomas', 'Agnes Nelson', 'ulrich'];
   List<String> get salesExecutive => _salesExecutive;
 
   set salesExecutive(List<String> value) {
@@ -387,6 +437,52 @@ class FormData extends ChangeNotifier {
     api.getData('getbranches').then((value){
       if(value.status){
         assignToBranch = new List<String>.from(value.data[0]['branch']);
+      }
+    });
+  }
+
+  void getExchangeCarMakes() {
+    api.getData('getexchangecarmakes').then((value){
+      if(value.status){
+        exchangeCarMakes = new List<String>.from(value.data[0]['otherCarMake']);
+      }
+    });
+  }
+
+  void getExchangeCarModels() {
+    api.getData('getexchangecarmodels').then((value){
+      if(value.status){
+        exchangeCarModels = new List<dynamic>.from(value.data["otherCarModels"]);
+      }
+    });
+  }
+
+  void getExchangeCarVariants() {
+    api.getData('getexchangecarvariants').then((value){
+      exchangeCarVariants = new List<dynamic>.from(value.data['otherCarVariants']);
+    });
+  }
+
+  void getExchangeCarColours() {
+    api.getData('getexchangecarcolours').then((value){
+      if(value.status){
+        exchangeCarColours = new List<dynamic>.from(value.data['otherCarColours']);
+      }
+    });
+  }
+
+  void getExchangeCarEvaluators() {
+    api.getData('getexchangecarevaluators').then((value){
+      if(value.status){
+        exchangeCarEvaluators = new List<String>.from(value.data[0]['vehicleEvaluator']);
+      }
+    });
+  }
+
+  void getPaymentTypes() {
+    api.getData('getpaymenttypes').then((value){
+      if(value.status){
+        paymentType = new List<String>.from(value.data[0]['paymentTypes']);
       }
     });
   }

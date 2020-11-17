@@ -58,8 +58,8 @@ class _NewEnquiryPageState extends State<NewEnquiryPage> {
               steps:[
                   FAStep(state: formData.activeStep>0?FAStepstate.complete:FAStepstate.editing, title: Text(CUSTOMER_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),textAlign: TextAlign.center,), content: CustomerDetailEntryForm(formData,enquiryProvider),isActive: formData.stepCount==0),
                   FAStep(state: formData.activeStep>1?FAStepstate.complete:FAStepstate.editing, title: Text(NEW_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: NewCarDetailEntryForm(formData,enquiryProvider),isActive: formData.stepCount==1 ),
-                  FAStep(state: FAStepstate.editing, title: Text(OLD_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: OldCarDetailEntryForm(formData,enquiryProvider), isActive: formData.stepCount==2,),
-                  FAStep(state: FAStepstate.editing, title: Text(BOOKING_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: BookingDetailEntryForm(formData,enquiryProvider), isActive: formData.stepCount==3,)
+                  FAStep(state: formData.activeStep>2?FAStepstate.complete:FAStepstate.editing, title: Text(OLD_CAR_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: OldCarDetailEntryForm(formData,enquiryProvider), isActive: formData.stepCount==2,),
+                  FAStep(state: formData.activeStep>3?FAStepstate.complete:FAStepstate.editing, title: Text(BOOKING_DETAIL,style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),), content: BookingDetailEntryForm(formData,enquiryProvider), isActive: formData.stepCount==3,)
               ],
             controlsBuilder: (BuildContext context,
                 {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
@@ -29,9 +31,16 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
     _amountController = TextEditingController();
   }
 
+  final _formKey = GlobalKey<FormState>();
+  final singleValidator = MultiValidator([
+    RequiredValidator(errorText: 'this field is required'),
+  ]);
+
   @override
   Widget build(BuildContext context) {
+    final FormData formData = Provider.of(context);
     return Form(
+      key: _formKey,
         child: Column(
         children: [
             Row(
@@ -43,42 +52,35 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
               ],
             ),
           SizedBox(height: LINE_HEIGHT,),
-          Container(
-            padding: EdgeInsets.all(4),
-            width: MediaQuery.of(context).size.width,
-            decoration: AppBorderStyle.appFormBorder(),
-            child: DropdownButton(
-                underline: Container(),
-                hint: Text(SALES_EXECUTIVE, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
-                icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                items: widget._formData.salesExecutive.map((e){
-                  return DropdownMenuItem(child: Text(e),value: e,);
-                }).toList(),
-                onChanged: onCarMakeTypeChanged
-            ),
+          DropdownButtonFormField(
+              validator: (value) => value == null ? 'this field is required' : null,
+              decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+              hint: Text(SALES_EXECUTIVE+'*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+              icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+              items: widget._formData.salesExecutive.map((e){
+                return DropdownMenuItem(child: Text(e),value: e,);
+              }).toList(),
+              onChanged: (val){formData.selectedSalesExecutive = val;}
           ),
           SizedBox(height: LINE_HEIGHT,),
-          Container(
-            padding: EdgeInsets.all(4),
-            width: MediaQuery.of(context).size.width,
-            decoration: AppBorderStyle.appFormBorder(),
-            child: DropdownButton(
-                underline: Container(),
-                hint: Text(PAYMENT_TYPE, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
-                icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                items: widget._formData.paymentType.map((e){
-                  return DropdownMenuItem(child: Text(e),value: e,);
-                }).toList(),
-                onChanged: onCarMakeTypeChanged
-            ),
+          DropdownButtonFormField(
+              validator: (value) => value == null ? 'this field is required' : null,
+              decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+              hint: Text(PAYMENT_TYPE+'*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+              icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+              items: widget._formData.paymentType.map((e){
+                return DropdownMenuItem(child: Text(e),value: e,);
+              }).toList(),
+              onChanged: onCarMakeTypeChanged
           ),
           SizedBox(height: LINE_HEIGHT,),
           TextFormField(
+            validator: singleValidator,
             keyboardType: TextInputType.phone,
             controller: _amountController,
             autofocus: false,
             decoration: InputDecoration(
-              labelText: AMOUNT,
+              labelText: AMOUNT+'*',
 
               labelStyle: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
               enabledBorder: AppBorderStyle.getFormBorder(),
@@ -86,8 +88,10 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
             ),
           ),
           SizedBox(height: LINE_HEIGHT,),
-          ButtonTheme(minWidth: MediaQuery.of(context).size.width-128,
-            child: RaisedButton(onPressed: (){}, color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
+          ButtonTheme(
+
+              minWidth: MediaQuery.of(context).size.width-128,
+            child: RaisedButton(onPressed: (){if (_formKey.currentState.validate()){formData.activeStep=4;Navigator.pushNamed(context, HOME_PAGE);}}, color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
             child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: APP_WHITE_COLOR
         ),
         routes: routes,
-        initialRoute: HOME_PAGE,
+        initialRoute: LOGIN_PAGE,
       ),
     );
   }

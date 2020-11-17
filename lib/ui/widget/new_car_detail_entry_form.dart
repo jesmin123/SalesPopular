@@ -52,8 +52,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
       children: [
         DropdownButtonFormField(
             validator: (value) => value == null ? 'this field is required' : null,
-            decoration:
-                InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+            decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
             hint: Text(
               CAR_MAKE,
               style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
@@ -21,124 +23,94 @@ class OldCarDetailEntryForm extends StatefulWidget {
 
 class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
 
-  TextEditingController _remarksController;
-  _OldCarDetailEntryFormState() {
-    _remarksController = TextEditingController();
-  }
+  TextEditingController _remarksController= new TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
+    final FormData formData = Provider.of(context);
     return Form(
+      key: _formKey,
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.all(4),
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              decoration: AppBorderStyle.appFormBorder(),
-              child: DropdownButton(
-                  underline: Container(),
-                  hint: Text(CAR_MAKE,
-                    style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
-                  icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.carMake.map((e) {
-                    return DropdownMenuItem(child: Text(e), value: e,);
-                  }).toList(),
-                  onChanged: onCarMakeTypeChanged
-              ),
+            DropdownButtonFormField(
+                validator: (value) => value == null ? 'this field is required' : null,
+                decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+                hint: Text(CAR_MAKE+'*',
+                  style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+                icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+                items: widget._formData.exchangeCarMakes.map((e) {
+                  return DropdownMenuItem(child: Text(e), value: e,);
+                }).toList(),
+                onChanged: (value){formData.selectedExchangeCarMakes = value;}
             ),
             SizedBox(height: LINE_HEIGHT,),
-            Container(
-              padding: EdgeInsets.all(4),
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              decoration: AppBorderStyle.appFormBorder(),
-              child: DropdownButton(
-                  underline: Container(),
-                  hint: Text(CAR_MODEL,
-                    style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
-                  icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.carModel.map((e) {
-                    return DropdownMenuItem(child: Text(e), value: e,);
-                  }).toList(),
-                  onChanged: onCarMakeTypeChanged
-              ),
+            DropdownButtonFormField(
+                validator: (value) => value == null ? 'this field is required' : null,
+                decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+                hint: Text(CAR_MODEL+'*',
+                  style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+                icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+                items: widget._formData.exchangeCarModels.map((e) {
+                  return DropdownMenuItem(child: Text(e['otherCarModel']), value: e['otherCarModel'],);
+                }).toList(),
+                onChanged: (value){formData.selectedExchaneCarModels = value;}
             ),
             SizedBox(height: LINE_HEIGHT,),
-            Container(
-              padding: EdgeInsets.all(4),
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              decoration: AppBorderStyle.appFormBorder(),
-              child: DropdownButton(
-                  underline: Container(),
-                  hint: Text(VARIANT,
-                    style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
-                  icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.carVariant.map((e) {
-                    return DropdownMenuItem(child: Text(e['carVariant']), value: e,);
-                  }).toList(),
-                  onChanged: onCarMakeTypeChanged
-              ),
+            DropdownButtonFormField(
+                validator: (value) => value == null ? 'this field is required' : null,
+                decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+                hint: Text(VARIANT+'*',
+                  style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+                icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+                items: widget._formData.exchangeCarVariants.map((e) {
+                  return DropdownMenuItem(child: Text(e['otherCarVariant']), value: e['otherCarVariant'],);
+                }).toList(),
+                onChanged: (value){formData.selectedExchangeCarVariants = value;}
             ),
             SizedBox(height: LINE_HEIGHT,),
-            Container(
-              padding: EdgeInsets.all(4),
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              decoration: AppBorderStyle.appFormBorder(),
-              child: DropdownButton(
-                  underline: Container(),
-                  hint: Text(
-                    COLOUR, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
-                  icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.carColor.map((e) {
-                    String val = e;
-                    if(val.length>20){
-                      val = val.substring(0,20);
-                    }
-                    return DropdownMenuItem(child: Text(val), value: e);
-                  }).toList(),
-                  onChanged: onCarMakeTypeChanged
-              ),
+            DropdownButtonFormField(
+                validator: (value) => value == null ? 'this field is required' : null,
+                decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+                hint: Text(
+                  COLOUR+'*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+                icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+                items: widget._formData.exchangeCarColours.map((e) {
+                  String val = e['otherCarColour'];
+                  if(val.length>20){
+                    val = val.substring(0,20);
+                  }
+                  return DropdownMenuItem(child: Text(val), value: e);
+                }).toList(),
+                onChanged: (value){formData.selectedExchangeCarColours = value;}
             ),
             SizedBox(height: LINE_HEIGHT,),
-            Container(
-              padding: EdgeInsets.all(4),
-              width: MediaQuery.of(context).size.width,
-              decoration: AppBorderStyle.appFormBorder(),
-              child: DropdownButton(
-                  underline: Container(),
-                  hint: Text(EVALUATOR_BRANCH, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
-                  icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.evaluatorBranch.map((e) {
-                    return DropdownMenuItem(child: Text(e), value: e,);
-                  }).toList(),
-                  onChanged: onCarMakeTypeChanged
-              ),
+            DropdownButtonFormField(
+                validator: (value) => value == null ? 'this field is required' : null,
+                decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+                hint: Text(EVALUATOR_BRANCH+'*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+                icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+                items: widget._formData.assignToBranch.map((e) {
+                  return DropdownMenuItem(child: Text(e), value: e,);
+                }).toList(),
+                onChanged: (value){formData.selectedBranch = value;}
             ),
             SizedBox(height: LINE_HEIGHT,),
-            Container(
-              padding: EdgeInsets.all(4),
-              width: MediaQuery.of(context).size.width,
-              decoration: AppBorderStyle.appFormBorder(),
-              child: DropdownButton(
-                  underline: Container(),
-                  hint: Text(EVALUATOR_NAME, style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
-                  icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-                  items: widget._formData.evaluatorName.map((e) {
-                    return DropdownMenuItem(child: Text(e), value: e,);
-                  }).toList(),
-                  onChanged: onCarMakeTypeChanged
-              ),
+            DropdownButtonFormField(
+                validator: (value) => value == null ? 'this field is required' : null,
+                decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+                hint: Text(EVALUATOR_NAME+'*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+                icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+                items: widget._formData.exchangeCarEvaluators.map((e) {
+                  String val = e;
+                  if(val.length > 20){
+                    val =val.substring(0,20);
+                  }
+                  return DropdownMenuItem(child: Text(val), value: e,);
+                }).toList(),
+                onChanged: (value){formData.selectedExchangeCarEvaluators = value;}
             ),
             SizedBox(height: LINE_HEIGHT,),
             TextFormField(
@@ -153,7 +125,11 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
             ),
             SizedBox(height: LINE_HEIGHT,),
             ButtonTheme(minWidth: MediaQuery.of(context).size.width-128,
-              child: RaisedButton(onPressed: (){}, color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
+              child: RaisedButton(onPressed: (){
+                if (_formKey.currentState.validate()){
+                  formData.activeStep = 3 ; formData.stepCount = 3;
+                }
+              }, color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
