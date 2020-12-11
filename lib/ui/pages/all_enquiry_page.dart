@@ -24,9 +24,6 @@ class _AllEnquiryPageState extends State<AllEnquiryPage> {
 
     final CasesProvider casesProvider = Provider.of(context,listen: false);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      casesProvider.getData();
-    });
   }
 
   @override

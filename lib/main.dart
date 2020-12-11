@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
 import 'package:sales_popular/ui/pages/change_password-page.dart';
 import 'package:sales_popular/ui/pages/delivary_page.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<EnquiryProvider>(create: (_)=>EnquiryProvider()),
         ChangeNotifierProvider<CasesProvider>(create: (_)=>CasesProvider()),
         ChangeNotifierProvider<UserDataProvider>(create: (_)=>UserDataProvider()),
+        ChangeNotifierProvider<CurrentProvider>(create: (_)=>CurrentProvider()),
       ],
       child: MaterialApp(
         title: APP_NAME,

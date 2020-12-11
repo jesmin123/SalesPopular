@@ -21,22 +21,7 @@ class NewEnquiryPage extends StatefulWidget {
 
 class _NewEnquiryPageState extends State<NewEnquiryPage> {
 
-  @override
-  void initState() {
-    super.initState();
-    getSupportingData();
-  }
 
-  getSupportingData(){
-
-    final FormData formData = Provider.of(context,listen: false);
-    final EnquiryProvider enquiryProvider = Provider.of(context,listen: false);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      formData.initDataLoading();
-      enquiryProvider.initData();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

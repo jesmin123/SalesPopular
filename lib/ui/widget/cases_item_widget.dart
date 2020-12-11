@@ -27,17 +27,17 @@ class _CasesItemWidgetState extends State<CasesItemWidget> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(widget.caseModel.getTime()),
+            Text("10:00 AM", style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR), ),
             VerticalDivider(),
           ],
         ),
       ),
-      title: Text(widget.caseModel.getCustomerName(), style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR),),
-      subtitle: Text(widget.caseModel.getVehicelName(), style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),),
+      title: Text('Mr. Ravi Aswin', style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR),),
+      subtitle: Text('Maruti Suzuki Celerio', style: AppFontStyle.bodyTextStyle(APP_BLACK_COLOR),),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(widget.caseModel.getStatus(), style: AppFontStyle.bodyTextStyle(PRIMARY_COLOR),),
+          Text(" ", style: AppFontStyle.bodyTextStyle(PRIMARY_COLOR),),
           SizedBox(width: 16,),
           Icon(LineIcons.arrow_circle_right)
         ],

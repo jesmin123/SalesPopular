@@ -15,7 +15,7 @@ class AppFontStyle{
   static TextStyle buttonTextStyle(Color color, {num textSize}) {
     return TextStyle(
         color: color,
-        fontSize: 12,
+        fontSize: textSize!= null?textSize:12,
         fontWeight: FontWeight.w300,
         fontFamily: "Poppins"
     );

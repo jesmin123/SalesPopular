@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
+import 'package:sales_popular/provider/enquiry_provider.dart';
+import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:sales_popular/constants/dimen.dart';
+import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/strings.dart';
 
 class LogInPage extends StatefulWidget {
@@ -22,9 +25,27 @@ class _LogInPageState extends State<LogInPage> {
     _passwordController = TextEditingController();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    getSupportingData();
+  }
+
+  getSupportingData(){
+
+    final FormData formData = Provider.of(context,listen: false);
+    final EnquiryProvider enquiryProvider = Provider.of(context,listen: false);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      formData.initDataLoading();
+      enquiryProvider.initData();
+    });
+  }
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final FormData formData = Provider.of(context);
     return Scaffold(
       backgroundColor: APP_WHITE_COLOR,
     body: Padding(
@@ -59,12 +80,14 @@ class _LogInPageState extends State<LogInPage> {
                     }
                     return null;
                   },
-                  controller: _userIdController,
+                  controller: _passwordController,
+                  obscureText: !formData.isPasswordShown,
                   decoration: InputDecoration(
                       enabledBorder: AppBorderStyle.getFormBorder(),
                       focusedBorder: AppBorderStyle.getFormBorder(color: APP_BLACK_COLOR),
                       labelText: "Password",
-                      labelStyle: AppFontStyle.regularTextStyle(APP_BLACK_COLOR)
+                      labelStyle: AppFontStyle.regularTextStyle(APP_BLACK_COLOR),
+                    suffixIcon: formData.isPasswordShown?IconButton(icon: Icon(Icons.visibility_off), onPressed: (){formData.isPasswordShown= false;},):IconButton(icon: Icon(Icons.visibility), onPressed: (){formData.isPasswordShown= true;},)
                   ),
                 ),
                 SizedBox(height: LINE_HEIGHT,),

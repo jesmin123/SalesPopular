@@ -7,6 +7,8 @@ import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';
+import 'package:sales_popular/model/CustomerDetails.dart';
+import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
 
@@ -31,10 +33,33 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
   @override
   Widget build(BuildContext context) {
     final FormData formData = Provider.of(context);
+    final CurrentProvider currentProvider = Provider.of(context);
     return Form(
       key: _formKey,
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.only( bottom: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  RaisedButton(onPressed:(){formData.stepCount = 3;},
+                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  color: PRIMARY_COLOR,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Skip ', style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR, textSize: 14.0)),
+                          Icon(Icons.skip_next, color: APP_WHITE_COLOR, size: ICON_SIZE*1.5,)
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
             DropdownButtonFormField(
                 validator: (value) => value == null ? 'this field is required' : null,
                 decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
@@ -82,9 +107,9 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
                   if(val.length>20){
                     val = val.substring(0,20);
                   }
-                  return DropdownMenuItem(child: Text(val), value: e);
+                  return DropdownMenuItem(child: Text(val), value: val);
                 }).toList(),
-                onChanged: (value){formData.selectedExchangeCarColours = value;}
+                onChanged: (val){formData.selectedExchangeCarColours = val;}
             ),
             SizedBox(height: LINE_HEIGHT,),
             DropdownButtonFormField(
@@ -95,7 +120,7 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
                 items: widget._formData.assignToBranch.map((e) {
                   return DropdownMenuItem(child: Text(e), value: e,);
                 }).toList(),
-                onChanged: (value){formData.selectedBranch = value;}
+                onChanged: (value){formData.selectedExchangeBranch = value;}
             ),
             SizedBox(height: LINE_HEIGHT,),
             DropdownButtonFormField(
@@ -127,7 +152,15 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
             ButtonTheme(minWidth: MediaQuery.of(context).size.width-128,
               child: RaisedButton(onPressed: (){
                 if (_formKey.currentState.validate()){
+                  OldCarDetails oldCarDetails = new OldCarDetails(
+                    exchangeCarMake: formData.selectedExchangeCarMakes, exchangeCarModel: formData.selectedExchaneCarModels,
+                    exchangeCarVariant: formData.selectedExchangeCarVariants, exchangeCarColor: formData.selectedExchangeCarColours,
+                    evalutorName: formData.selectedExchangeCarEvaluators, evalutorBranch: formData.selectedExchangeBranch,
+                    remarks: _remarksController.text
+                  );
+
                   formData.activeStep = 3 ; formData.stepCount = 3;
+                  currentProvider.caseModel.oldCarDetails = oldCarDetails;
                 }
               }, color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
                 child: Row(

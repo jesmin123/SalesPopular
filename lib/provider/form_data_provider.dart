@@ -31,6 +31,15 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _isPasswordShown = false;
+
+
+  bool get isPasswordShown => _isPasswordShown;
+
+  set isPasswordShown(bool value) {
+    _isPasswordShown = value;
+    notifyListeners();
+  }
 
   String selectedExchangeCarMakes;
   List<String> _exchangeCarMakes = new List();
@@ -296,7 +305,7 @@ class FormData extends ChangeNotifier {
     _scheduleCallOn = value;
     notifyListeners();
   }
-
+  String selectedExchangeBranch;
   String selectedBranch;
   List<String> _assignToBranch = new List();
   List<String> get assignToBranch => _assignToBranch;
@@ -332,6 +341,7 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
+  String selectedPaymentType;
   List<String> _paymentType = new List();
   List<String> get paymentType => _paymentType;
 

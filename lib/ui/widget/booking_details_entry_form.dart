@@ -8,6 +8,8 @@ import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';
+import 'package:sales_popular/model/CustomerDetails.dart';
+import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
 
@@ -36,9 +38,12 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
     RequiredValidator(errorText: 'this field is required'),
   ]);
 
+
+
   @override
   Widget build(BuildContext context) {
     final FormData formData = Provider.of(context);
+    final CurrentProvider currentProvider = Provider.of(context);
     return Form(
       key: _formKey,
         child: Column(
@@ -71,7 +76,7 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
               items: widget._formData.paymentType.map((e){
                 return DropdownMenuItem(child: Text(e),value: e,);
               }).toList(),
-              onChanged: onCarMakeTypeChanged
+              onChanged: (val){formData.selectedPaymentType = val;}
           ),
           SizedBox(height: LINE_HEIGHT,),
           TextFormField(
@@ -91,7 +96,16 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
           ButtonTheme(
 
               minWidth: MediaQuery.of(context).size.width-128,
-            child: RaisedButton(onPressed: (){if (_formKey.currentState.validate()){formData.activeStep=4;Navigator.pushNamed(context, HOME_PAGE);}}, color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
+            child: RaisedButton(onPressed: (){if (_formKey.currentState.validate()){
+              BookingDetails bookingDetails = new BookingDetails(
+                salesexecutive: formData.selectedSalesExecutive, paymentType: formData.selectedPaymentType, amount: _amountController.text
+              );
+              formData.activeStep=4;
+              currentProvider.caseModel.bookingDetails = bookingDetails;
+              currentProvider.caseModel.getFinalData();
+
+              Navigator.pushNamed(context, HOME_PAGE);}},
+                color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
             child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

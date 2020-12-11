@@ -8,6 +8,9 @@ import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';
+import 'package:sales_popular/model/CustomerDetails.dart';
+import 'package:sales_popular/provider/cases_provider.dart';
+import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
 
@@ -63,8 +66,8 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
   @override
   Widget build(BuildContext context) {
     final FormData formData = Provider.of(context);
-
-
+    final CasesProvider casesProvider = Provider.of(context);
+    final CurrentProvider currentProvider = Provider.of(context);
 
     return Form(
       key: _formKey,
@@ -241,7 +244,21 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
               onChanged: (value){formData.selectedState = value;}
           ),
           SizedBox(height: LINE_HEIGHT,),
-          ButtonTheme(minWidth: MediaQuery.of(context).size.width-128, child: RaisedButton(elevation: 2, onPressed: (){if (_formKey.currentState.validate()){formData.activeStep=1;formData.stepCount=1;}}, color: PRIMARY_COLOR, child: Text(SAVE, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR)), shape: AppBorderStyle.appButtonShape(),))
+          ButtonTheme(minWidth: MediaQuery.of(context).size.width-128, child: RaisedButton(elevation: 2,
+            onPressed: (){if (_formKey.currentState.validate())
+            {
+              CustomerDetails customer = new CustomerDetails(customerName: _nameController.text,customerType: formData.selectedCustomerType,
+              salutation: formData.selectedSalutations, dob: _dobController.text, email:  _emailController.text, mobileNo: _mobNoController.text,
+                secondaryMobileNo: _sccMobNoController.text, addressLine1: _addressLine1Controller.text, addressLine2:  _addressLine2Controller.text,
+                addressArea: _addressAreaController.text, village: formData.selectedVillages, taluk: formData.selectedTaluk, district: formData.selectedDistrict,
+                state: formData.selectedState
+              );
+
+              formData.activeStep=1;formData.stepCount=1;
+              currentProvider.caseModel.customerDetails = customer;
+
+
+          }}, color: PRIMARY_COLOR, child: Text(SAVE, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR)), shape: AppBorderStyle.appButtonShape(),))
         ],
       ),
 

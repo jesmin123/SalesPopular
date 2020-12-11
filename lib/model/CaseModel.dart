@@ -1,30 +1,63 @@
 
+import 'dart:convert';
+
+import 'package:sales_popular/api/api.dart';
+import 'package:sales_popular/model/CustomerDetails.dart';
 
 class CaseModel{
 
-  String time;
-  String customerName;
-  String vehicleName;
-  String status;
+  CustomerDetails _customerDetails;
+  NewCarDetails _newCarDetails;
+  bool _isCarExchange;
+  OldCarDetails _oldCarDetails;
+  BookingDetails _bookingDetails;
 
 
-  CaseModel({this.time, this.customerName, this.vehicleName, this.status});
+  CustomerDetails get customerDetails => _customerDetails;
 
-  String getTime(){
-    return time;
+  set customerDetails(CustomerDetails value) {
+    _customerDetails = value;
+
   }
 
-  String getCustomerName(){
-    return customerName;
+  CaseModel();
+
+  NewCarDetails get newCarDetails => _newCarDetails;
+
+  set newCarDetails(NewCarDetails value) {
+    _newCarDetails = value;
   }
 
-  String getVehicelName(){
-    return vehicleName;
+  bool get isCarExchange => _isCarExchange;
+
+  set isCarExchange(bool value) {
+    _isCarExchange = value;
   }
 
-  String getStatus(){
-    return status;
+  OldCarDetails get oldCarDetails => _oldCarDetails;
+
+  set oldCarDetails(OldCarDetails value) {
+    _oldCarDetails = value;
   }
 
+  BookingDetails get bookingDetails => _bookingDetails;
 
+  set bookingDetails(BookingDetails value) {
+    _bookingDetails = value;
+  }
+
+  String getFinalData(){
+    Map data = toJson();
+    String dataS = jsonEncode(data);
+    print(dataS);
+  }
+
+  Map<String, dynamic> toJson()=>
+      {
+        'customerData':_customerDetails.toJson(),
+        'newCar' : _newCarDetails.toJson(),
+        'isCarExchange': true,
+        'oldcar' : _oldCarDetails.toJson(),
+        'booking': _bookingDetails.toJson()
+      };
 }
