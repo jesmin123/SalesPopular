@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sales_popular/api/myserverutils.dart';
 import 'package:sales_popular/model/UserData.dart';
 
 class UserDataProvider extends ChangeNotifier{
@@ -26,4 +27,29 @@ class UserDataProvider extends ChangeNotifier{
     isLoading = false;
   }
 
+  registerUser(String emp,String mobile)
+  {
+    String route = '?function=user_register&mobile=${mobile}&emp_code=${emp}';
+    myServer.getData(route).then((value){
+      if(value.status){
+        print(value.data);
+      }
+      Map result=value.data;
+      String OTP=result['posts']['otp'];
+      String userId=result['posts']['user_id'];
+      print(OTP);
+      print(userId);
+      registerOtp(userId, OTP);
+
+    });
+  }
+  registerOtp(String userid,String otp)
+  {
+    String route= '?function=verify_otp&user_id=${userid}&otp=${otp}';
+    myServer.getData(route).then((value) {
+      if (value.status) {
+        print(value.data);
+      }
+    });
+  }
 }

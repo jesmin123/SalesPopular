@@ -8,6 +8,7 @@ import 'package:sales_popular/ui/pages/follow_up_page.dart';
 import 'package:sales_popular/ui/pages/login_page.dart';
 import 'package:sales_popular/ui/pages/my_profile_page.dart';
 import 'package:sales_popular/ui/pages/home_page.dart';
+import 'package:sales_popular/ui/pages/registration.dart';
 import './provider/cases_provider.dart';
 import './provider/enquiry_provider.dart';
 import './provider/form_data_provider.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
     DELIVERY_PAGE : (context)=>DeliveryPage(),
     FOLLOW_UP_PAGE : (context)=>FollowUpPage(),
     LOGIN_PAGE : (context)=>LogInPage(),
-    CHANGE_PASSWORD_PAGE :(context)=>ChangePasswordPage()
+    CHANGE_PASSWORD_PAGE :(context)=>ChangePasswordPage(),
+    REGISTRATION_PAGE : (context)=> Register()
   };
 
   @override

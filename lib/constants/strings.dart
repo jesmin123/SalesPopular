@@ -10,6 +10,7 @@ const DELIVERY_PAGE = 'DeliveryPage';
 const FOLLOW_UP_PAGE = 'FollowUpPage';
 const SALES_APP_PAGE = 'SalesAppPage';
 const CHANGE_PASSWORD_PAGE = "ChangePasswordPage";
+const REGISTRATION_PAGE = 'RegistrationPage';
 
 
 

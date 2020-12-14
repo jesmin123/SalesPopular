@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
@@ -8,6 +9,7 @@ import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/strings.dart';
+import 'package:sales_popular/ui/pages/registration.dart';
 
 class LogInPage extends StatefulWidget {
 
@@ -126,17 +128,26 @@ class _LogInPageState extends State<LogInPage> {
                         Text("Login",
                             style: AppFontStyle.labelTextStyle(APP_WHITE_COLOR)),
                         Icon(Icons.keyboard_arrow_right, color: APP_WHITE_COLOR)
+
                       ],
                     ),
                   ),
 
                 ),
 
-              ],
+
+                InkWell(
+                  child:  Text("Register",style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),textAlign: TextAlign.center),
+                  onTap:() {Navigator.pushNamed(context, REGISTRATION_PAGE);},
+                ),
+
+                    ],
+                  ),
+                )
+
+       ,
             ),
         ),
-        ),
-      ),
-    );
+        );
   }
 }
