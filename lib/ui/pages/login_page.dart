@@ -4,11 +4,13 @@ import 'package:flutter/painting.dart';
 import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
+import 'package:sales_popular/model/RespObj.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/strings.dart';
+import 'package:sales_popular/provider/user_data_provider.dart';
 import 'package:sales_popular/ui/pages/registration.dart';
 
 class LogInPage extends StatefulWidget {
@@ -19,13 +21,10 @@ class LogInPage extends StatefulWidget {
 
 class _LogInPageState extends State<LogInPage> {
 
-  TextEditingController _userIdController;
-  TextEditingController _passwordController;
+  TextEditingController _userIdController = new TextEditingController();
+  TextEditingController _passwordController= new TextEditingController();
 
-  logInPageState(){
-    _userIdController = TextEditingController();
-    _passwordController = TextEditingController();
-  }
+
 
   @override
   void initState() {
@@ -47,6 +46,7 @@ class _LogInPageState extends State<LogInPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    UserDataProvider userDataProvider = Provider.of(context);
     final FormData formData = Provider.of(context);
     return Scaffold(
       backgroundColor: APP_WHITE_COLOR,
@@ -114,9 +114,15 @@ class _LogInPageState extends State<LogInPage> {
                 Container(
                   width: 180,
                   child: RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        Navigator.pushNamed(context, HOME_PAGE);
+                        RespObj res = await userDataProvider.login(_userIdController.text, _passwordController.text);
+                        if(res.status){
+                          Navigator.pushNamed(context, HOME_PAGE);
+                        }
+                       else{
+                          Navigator.pushNamed(context,MY_PROFILE );
+                        }
                       }
                     },
                     color: PRIMARY_COLOR,
