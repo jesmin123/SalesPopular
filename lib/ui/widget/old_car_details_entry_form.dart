@@ -159,7 +159,8 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
                     remarks: _remarksController.text
                   );
 
-                  formData.activeStep = 3 ; formData.stepCount = 3;
+                  formData.activeStep = 3 ;
+                  formData.stepCount = 3;
                   currentProvider.caseModel.oldCarDetails = oldCarDetails;
                 }
               }, color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),

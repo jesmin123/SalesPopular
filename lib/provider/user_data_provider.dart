@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:sales_popular/api/api.dart';
 import 'package:sales_popular/api/myserverutils.dart';
 import 'package:sales_popular/model/RespObj.dart';
 import 'package:sales_popular/model/UserData.dart';
@@ -7,6 +10,8 @@ class UserDataProvider extends ChangeNotifier{
 
     String Password;
   UserData _userData;
+  String UserID;
+  String SessionID;
   bool _isLoading  = false;
   UserData get userData => _userData;
 
@@ -64,11 +69,32 @@ class UserDataProvider extends ChangeNotifier{
        if (value.status) {
          print(value.data);
        }
-     });
+     } );
+  }
+   loginSessionId(String username,String Password){
+          String route='http://13.234.53.184/mobapitesting/api/login?username=Mobile User&password=MobileUser';
+          Map<String, dynamic> jsonMap = {
+              "Company":"PVSL_Live1_MS",
+              "UserName":"Mobile User",
+              "Password":"MobileUser"
+          };
+          String jsonString = json.encode(jsonMap);
+          api.postData(route,mBody: jsonString).then((value){
+        if (value.status){
+          print(value.data);
+          Map response=value.data;
+          UserID=response['UserId'];
+          SessionID=response['SessionId'];
 
-}
-  Future<RespObj> login(String userid,String password) async {
-    String route= '?function=user_login&mobile=${userid}&password=${password}';
-    RespObj resp = await  myServer.getData(route);
-    return resp;
-}}
+        }
+          });
+   }
+
+    Future<RespObj> login(String userid,String password) async {
+      String route= '?function=user_login&mobile=${userid}&password=${password}';
+      RespObj resp = await  myServer.getData(route);
+      if (resp.status){
+        loginSessionId('username', 'Password');
+      }
+      return resp;
+    }}

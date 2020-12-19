@@ -12,6 +12,7 @@ import 'package:sales_popular/model/CustomerDetails.dart';
 import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
+import 'package:sales_popular/provider/user_data_provider.dart';
 
 import 'new_car_detail_entry_form.dart';
 
@@ -44,6 +45,7 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
   Widget build(BuildContext context) {
     final FormData formData = Provider.of(context);
     final CurrentProvider currentProvider = Provider.of(context);
+    final UserDataProvider userProvider = Provider.of(context);
     return Form(
       key: _formKey,
         child: Column(
@@ -102,8 +104,8 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
               );
               formData.activeStep=4;
               currentProvider.caseModel.bookingDetails = bookingDetails;
-              currentProvider.caseModel.getFinalData();
-
+              String dataBase64 = currentProvider.caseModel.getFinalData();
+              currentProvider.saveTransaction(userProvider.UserID, userProvider.SessionID, dataBase64);
               Navigator.pushNamed(context, HOME_PAGE);}},
                 color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
             child: Row(

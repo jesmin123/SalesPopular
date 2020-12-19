@@ -47,17 +47,22 @@ class CaseModel{
   }
 
   String getFinalData(){
-    Map data = toJson();
+    Map data = this.toJson();
     String dataS = jsonEncode(data);
     print(dataS);
+    dataS  = base64.encode(utf8.encode(dataS));
+    print(dataS);
+    return dataS;
   }
 
-  Map<String, dynamic> toJson()=>
-      {
+  Map<String, dynamic> toJson(){
+     Map<String,dynamic> data =  {
         'customerData':_customerDetails.toJson(),
         'newCar' : _newCarDetails.toJson(),
         'isCarExchange': true,
         'oldcar' : _oldCarDetails.toJson(),
         'booking': _bookingDetails.toJson()
       };
+     return data;
+  }
 }
