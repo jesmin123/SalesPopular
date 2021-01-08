@@ -20,6 +20,7 @@ class FormData extends ChangeNotifier {
     getExchangeCarColours();
     getExchangeCarEvaluators();
     getPaymentTypes();
+    getSource();
   }
 
   int _activeStep = 0;
@@ -350,7 +351,15 @@ class FormData extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Loaders
+  String selectedSource;
+  List<String> _source = new List();
+
+
+  List<String> get source => _source;
+
+  set source(List<String> value) {
+    _source = value;
+  } // Loaders
   bool _isCustomerTypeLoading = false;
   bool _isSalutationLoading = false;
   bool _isStatesLoading = false;
@@ -496,5 +505,14 @@ class FormData extends ChangeNotifier {
       }
     });
   }
+
+  void getSource() {
+    api.getData('getsourceofenquiry').then((value){
+      if(value.status){
+        source = new List<String>.from(value.data[0]['sourceofEnquiry']);
+      }
+    });
+  }
+
 }
 

@@ -13,6 +13,7 @@ import 'package:sales_popular/provider/cases_provider.dart';
 import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
+import 'package:sales_popular/utils/loaderUtilis.dart';
 
 class CustomerDetailEntryForm extends StatefulWidget {
 
@@ -253,9 +254,13 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
                 addressArea: _addressAreaController.text, village: formData.selectedVillages, taluk: formData.selectedTaluk, district: formData.selectedDistrict,
                 state: formData.selectedState
               );
-
-              formData.activeStep=1;formData.stepCount=1;
-              currentProvider.caseModel.customerDetails = customer;
+            Future.delayed(Duration(seconds: 3)).then((value) {
+                Loader.getLoader(context).hide().whenComplete(() {
+                  formData.activeStep = 1;
+                  formData.stepCount = 1;
+                  currentProvider.caseModel.customerDetails = customer;
+                });
+              });
 
 
           }}, color: PRIMARY_COLOR, child: Text(SAVE, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR)), shape: AppBorderStyle.appButtonShape(),))
