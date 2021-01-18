@@ -130,7 +130,7 @@ class NewCarDetails{
    'variant': variant,
    'color': color,
    'isAvailable': true,
-   'likelyToPurchase': likelyToPurchaseWithin,
+   'likelyToPurchase': "10",
    'followUp':{
      'date': followUpDate,
      'time': followUpTime,
@@ -190,7 +190,6 @@ class BookingDetails {
   BookingDetails({this.salesexecutive, this.paymentType, this.amount});
 
   Map<String, dynamic> toJson()=>{
-
 
       'salesExecutive' : salesexecutive,
       'paymentType' : paymentType,
