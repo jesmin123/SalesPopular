@@ -11,6 +11,7 @@ class UserDataProvider extends ChangeNotifier{
     String Password;
   UserData _userData;
   String UserID;
+  String accessToken;
   String SessionID;
   bool _isLoading  = false;
   UserData get userData => _userData;
@@ -34,44 +35,55 @@ class UserDataProvider extends ChangeNotifier{
     isLoading = false;
   }
 
-  registerUser(String emp,String mobile,String password)
-  {
+  Future<bool> registerUser(String emp,String mobile,String password) async {
+
     String route = '?function=user_register&mobile=${mobile}&emp_code=${emp}&password=${password}';
-    myServer.getData(route).then((value){
-      if(value.status){
-        print(value.data);
+    RespObj value = await myServer.getData(route);
+
+      if(!value.status){
+        return false;
       }
       Password=password;
       Map result=value.data;
-      String OTP=result['posts']['otp'];
       String userId=result['posts']['user_id'];
-      print(OTP);
+      UserID = userId;
       print(userId);
-      registerOtp(userId, OTP, password);
-
-    });
+      return true;
   }
-  registerOtp(String userid,String otp,String password)
-  {
-    String route= '?function=verify_otp&user_id=${userid}&otp=${otp}';
-    myServer.getData(route).then((value) {
-      if (value.status) {
-        print(value.data);
+
+    Future<bool> registerOtp(String otp) async {
+      String route= '?function=verify_otp&user_id=${UserID}&otp=${otp}';
+      RespObj value = await myServer.getData(route);
+      if (!value.status) {
+          return false;
       }
       Map result=value.data;
-      String accesstoken=result['posts']['access_token'];
-      updatePassword(userid, Password, accesstoken);
-    });
-  }
-   updatePassword(String userid,String password,String accesstoken){
-     String route= '?function=update_password&user_id=${userid}&password=${Password}&access_token=${accesstoken}';
-     myServer.getData(route).then((value) {
+      String accesstoken = result['posts']['access_token'];
+      accessToken = accesstoken;
+      return true;
+    }
+
+    Future<bool> updatePassword(String password) async {
+     String route= '?function=update_password&user_id=${UserID}&password=${Password}&access_token=${accessToken}';
+     RespObj value  = await myServer.getData(route);
        if (value.status) {
          print(value.data);
        }
-     } );
+
+       return value.status;
   }
-   loginSessionId(String username,String Password){
+
+    UserData _user ;
+
+
+    UserData get user => _user;
+
+  set user(UserData value) {
+    _user = value;
+    notifyListeners();
+  }
+
+  loginSessionId(String username,String Password){
           String route='http://13.234.53.184/mobapitesting/api/login?username=Mobile User&password=MobileUser';
           Map<String, dynamic> jsonMap = {
               "Company":"PVSL_Live1_MS",
@@ -94,6 +106,7 @@ class UserDataProvider extends ChangeNotifier{
       String route= '?function=user_login&mobile=${userid}&password=${password}';
       RespObj resp = await  myServer.getData(route);
       if (resp.status){
+        user = UserData.fromJSON(resp.data['posts']);
         loginSessionId('username', 'Password');
       }
       return resp;

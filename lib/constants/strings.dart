@@ -11,6 +11,8 @@ const FOLLOW_UP_PAGE = 'FollowUpPage';
 const SALES_APP_PAGE = 'SalesAppPage';
 const CHANGE_PASSWORD_PAGE = "ChangePasswordPage";
 const REGISTRATION_PAGE = 'RegistrationPage';
+const OTP_PAGE = 'OTPPage';
+const NEW_PASSWORD_PAGE = 'NewPasswordPage';
 
 
 

@@ -6,7 +6,9 @@ import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/dimen.dart';
+import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class Register extends StatefulWidget {
@@ -120,16 +122,27 @@ class _RegisterState extends State<Register> {
                   width: 360,
                   child: RaisedButton(
 
-                      onPressed: () {
-
+                      onPressed: () async {
                         if (_formKey.currentState.validate()) {
-                          userDataProvider.registerUser(_empController.text,_mobileController.text,_passwordController.text);
+                          bool status  = await userDataProvider.registerUser(_empController.text,_mobileController.text,_passwordController.text);
+                          if(status){
+                            Navigator.pushReplacementNamed(context, OTP_PAGE);
+                          }else{
+                            Fluttertoast.showToast(
+                                msg: "User not found",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                          }
                         }
                       },
 
                     color: PRIMARY_COLOR,
                     shape: RoundedRectangleBorder(
-
                         borderRadius: BorderRadius.circular(16)),
 
                     child: Row(

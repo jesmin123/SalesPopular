@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sales_popular/constants/app_border_style.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
@@ -12,8 +11,7 @@ import 'package:sales_popular/constants/dimen.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
-import 'package:sales_popular/ui/pages/registration.dart';
-import 'package:sales_popular/utils/loaderUtilis.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LogInPage extends StatefulWidget {
 
@@ -46,8 +44,6 @@ class _LogInPageState extends State<LogInPage> {
   }
 
   final _formKey = GlobalKey<FormState>();
-  FocusNode f1 = FocusNode();
-
   @override
   Widget build(BuildContext context) {
     UserDataProvider userDataProvider = Provider.of(context);
@@ -80,7 +76,6 @@ class _LogInPageState extends State<LogInPage> {
                 ),
                 SizedBox(height: LINE_HEIGHT,),
                 TextFormField(
-                  focusNode: f1,
                   validator: (value){
                     if(value.isEmpty){
                       return "Please enter the passwoord";
@@ -121,22 +116,19 @@ class _LogInPageState extends State<LogInPage> {
                   child: RaisedButton(
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        f1.unfocus();
-                        Loader.getLoader(context).show();
                         RespObj res = await userDataProvider.login(_userIdController.text, _passwordController.text);
-                        Loader.getLoader(context).hide();
                         if(res.status){
                           Navigator.pushNamed(context, HOME_PAGE);
                         }
                        else{
                           Fluttertoast.showToast(
-                            msg: 'Mobile No. or Password is Wrong',
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: PRIMARY_COLOR,
-                            textColor: Colors.white,
-                            fontSize: 16.0,
+                              msg: "Login Failed: Invalid mobile or password",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0
                           );
                         }
                       }
