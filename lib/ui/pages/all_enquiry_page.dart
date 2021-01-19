@@ -1,4 +1,5 @@
 
+import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/ui/widget/cases_item_widget.dart';
 import '../../provider/cases_provider.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class _AllEnquiryPageState extends State<AllEnquiryPage> {
 
   @override
   Widget build(BuildContext context) {
-    final CasesProvider casesProvider = Provider.of(context);
+    final EnquiryProvider enquiryProvider = Provider.of(context);
     return Scaffold(
       appBar: MAppBar(ALL_ENQUIRY_TITLE),
         backgroundColor: APP_WHITE_COLOR,
@@ -38,10 +39,10 @@ class _AllEnquiryPageState extends State<AllEnquiryPage> {
             return Divider();
           },
           shrinkWrap: true,
-            itemCount: casesProvider.cases.length,
+            itemCount: enquiryProvider.casesList.length,
             itemBuilder: (BuildContext context,int index)
             {
-              return CasesItemWidget(casesProvider.cases[index]);
+              return CasesItemWidget(enquiryProvider.casesList[index]);
             }
         ),
 

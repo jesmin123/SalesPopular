@@ -111,7 +111,7 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
           ButtonTheme(
 
               minWidth: MediaQuery.of(context).size.width-128,
-            child: RaisedButton(onPressed: (){if (_formKey.currentState.validate()){
+            child: RaisedButton(onPressed: () async {if (_formKey.currentState.validate()){
               BookingDetails bookingDetails = new BookingDetails(
                 salesexecutive: formData.selectedSalesExecutive, paymentType: formData.selectedPaymentType, amount: _amountController.text
               );

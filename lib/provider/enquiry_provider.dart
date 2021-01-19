@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sales_popular/model/CaseModel.dart';
 import 'package:sales_popular/model/CustomerDetails.dart';
 import 'package:sales_popular/api/api.dart';
 import 'package:sales_popular/model/RespObj.dart';
@@ -19,6 +20,7 @@ class EnquiryProvider extends ChangeNotifier{
 
   initData({CustomerDetails customerDetails}){
       this.customerDetail = new CustomerDetails();
+      getSalesEnquiryDetails();
   }
 
 
@@ -61,7 +63,33 @@ class EnquiryProvider extends ChangeNotifier{
     return isAvailable;
 }
 
+  List<CaseModel> _casesList = [];
 
+  List<CaseModel> get casesList => _casesList;
 
+  set casesList(List<CaseModel> value) {
+    _casesList = value;
+    notifyListeners();
+  }
 
+  Future getSalesEnquiryDetails() async{
+    List<CaseModel> casesListTemp = [];
+    String route ="getenquiries?fromDate=2021-01-13&toDate=2021-01-13&salesExecutive=Naveen P N-26040T";
+    RespObj response = await api.getData(route);
+    List<dynamic> data= response.data['getSalesEnquiriesDetails'];
+    data.forEach((element) {
+      casesListTemp.add(CaseModel.fromJson(element));
+    });
+    casesList = casesListTemp;
+    print(data);
+}
+
+CaseModel _selectedCaseModel;
+
+  CaseModel get selectedCaseModel => _selectedCaseModel;
+
+  set selectedCaseModel(CaseModel value) {
+    _selectedCaseModel = value;
+    notifyListeners();
+  }
 }
