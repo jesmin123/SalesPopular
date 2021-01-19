@@ -130,7 +130,7 @@ class NewCarDetails{
    'variant': variant,
    'color': color,
    'isAvailable': true,
-   'likelyToPurchase': "10",
+   'likelyToPurchase': '20',
    'followUp':{
      'date': followUpDate,
      'time': followUpTime,
@@ -185,15 +185,17 @@ class BookingDetails {
 
   String salesexecutive;
   String paymentType;
+  String source;
   String amount;
 
-  BookingDetails({this.salesexecutive, this.paymentType, this.amount});
+
+  BookingDetails({this.salesexecutive, this.paymentType, this.amount, this.source});
 
   Map<String, dynamic> toJson()=>{
-
       'salesExecutive' : salesexecutive,
       'paymentType' : paymentType,
-      'amount' : amount,
+    'amount' : amount,
+    "sourceofEnquiry": source
 
   };
 

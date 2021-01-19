@@ -14,6 +14,7 @@ import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:sales_popular/utils/loaderUtilis.dart';
 
 class NewCarDetailEntryForm extends StatefulWidget {
   final FormData _formData;
@@ -436,6 +437,7 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
                 child: RaisedButton(
                   onPressed: () {
                     if (_key.currentState.validate()){
+                      Loader.getLoader(context).show();
                       NewCarDetails newCarDetails = new NewCarDetails(
                         carMake: formData.selectedCarMake, carModel: formData.selectedModel, variant: formData.selectedVariant,
                         color: formData.selectedCarColor, likelyToPurchaseWithin: formData.selectedLikelyToPurchaseWithin,
@@ -443,9 +445,12 @@ class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
                         scheduleCallOn: _scheduleCallOnController.text, assignToBranch: formData.selectedBranch,
                         testDriveDate: _testDriveDateController.text, testDriveTime: _testDriveTimeController.text
                       );
-
-                      formData.activeStep=2;formData.stepCount=2;
-                      currentProvider.caseModel.newCarDetails = newCarDetails;
+    Future.delayed(Duration(seconds: 3)).then((value) {
+    Loader.getLoader(context).hide().whenComplete(() {
+    formData.activeStep=2;formData.stepCount=2;
+    currentProvider.caseModel.newCarDetails = newCarDetails;
+    });
+    });
 
                     }
                   },

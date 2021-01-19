@@ -11,6 +11,7 @@ import 'package:sales_popular/model/CustomerDetails.dart';
 import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
+import 'package:sales_popular/utils/loaderUtilis.dart';
 
 class OldCarDetailEntryForm extends StatefulWidget {
 
@@ -152,16 +153,20 @@ class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
             ButtonTheme(minWidth: MediaQuery.of(context).size.width-128,
               child: RaisedButton(onPressed: (){
                 if (_formKey.currentState.validate()){
+
                   OldCarDetails oldCarDetails = new OldCarDetails(
                     exchangeCarMake: formData.selectedExchangeCarMakes, exchangeCarModel: formData.selectedExchaneCarModels,
                     exchangeCarVariant: formData.selectedExchangeCarVariants, exchangeCarColor: formData.selectedExchangeCarColours,
                     evalutorName: formData.selectedExchangeCarEvaluators, evalutorBranch: formData.selectedExchangeBranch,
                     remarks: _remarksController.text
                   );
-
-                  formData.activeStep = 3 ;
-                  formData.stepCount = 3;
-                  currentProvider.caseModel.oldCarDetails = oldCarDetails;
+    Future.delayed(Duration(seconds: 3)).then((value) {
+                    Loader.getLoader(context).hide().whenComplete(() {
+                      formData.activeStep = 3;
+                      formData.stepCount = 3;
+                      currentProvider.caseModel.oldCarDetails = oldCarDetails;
+                    });
+                  });
                 }
               }, color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
                 child: Row(

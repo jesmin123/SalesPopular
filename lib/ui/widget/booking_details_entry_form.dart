@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,7 @@ import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
+import 'package:sales_popular/utils/loaderUtilis.dart';
 
 import 'new_car_detail_entry_form.dart';
 
@@ -81,6 +83,17 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
               onChanged: (val){formData.selectedPaymentType = val;}
           ),
           SizedBox(height: LINE_HEIGHT,),
+          DropdownButtonFormField(
+              validator: (value) => value == null ? 'this field is required' : null,
+              decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
+              hint: Text('Source of Enquiry'+'*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
+              icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
+              items: widget._formData.source.map((e){
+                return DropdownMenuItem(child: Text(e),value: e,);
+              }).toList(),
+              onChanged: (val){formData.selectedSource = val;}
+          ),
+          SizedBox(height: LINE_HEIGHT,),
           TextFormField(
             validator: singleValidator,
             keyboardType: TextInputType.phone,
@@ -105,20 +118,34 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
               formData.activeStep=4;
               currentProvider.caseModel.bookingDetails = bookingDetails;
               String dataBase64 = currentProvider.caseModel.getFinalData();
-              currentProvider.saveTransaction(userProvider.UserID, userProvider.SessionID, dataBase64);
+              bool status = await currentProvider.saveTransaction(userProvider.UserID, userProvider.SessionID, dataBase64);
+              Loader.getLoader(context).hide();
+              if(status){
+                showSucessDialog();
+              }else{
+                Fluttertoast.showToast(
+                  msg: 'Something wrong',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: PRIMARY_COLOR,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+                );
 
-              showSucessDialog();}},
+              }
+              }},
                 color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(FINISH, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR),),
-                  SizedBox(width: TEXT_WIDTH,),
-                  Icon(Icons.done, size: ARROW_RIGHT, color: APP_WHITE_COLOR,)
-                ],
-             )
-           )
-      ),
+            child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+            Text(FINISH, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR),),
+            SizedBox(width: TEXT_WIDTH,),
+            Icon(Icons.done, size: ARROW_RIGHT, color: APP_WHITE_COLOR,)
+        ],
+        )
+    )
+    ),
           SizedBox(height: LINE_HEIGHT*1/2,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -155,7 +182,7 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
 
                       FlatButton(
                           onPressed: (){
-                            Navigator.pushNamed(context, LOGIN_PAGE);
+                            Navigator.pushNamed(context, HOME_PAGE);
                           },
                           child: Text("OK", style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),)
                       ),
