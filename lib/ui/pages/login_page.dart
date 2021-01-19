@@ -11,7 +11,7 @@ import 'package:sales_popular/constants/dimen.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
-import 'package:sales_popular/ui/pages/registration.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LogInPage extends StatefulWidget {
 
@@ -121,7 +121,15 @@ class _LogInPageState extends State<LogInPage> {
                           Navigator.pushNamed(context, HOME_PAGE);
                         }
                        else{
-                          Navigator.pushNamed(context,MY_PROFILE );
+                          Fluttertoast.showToast(
+                              msg: "Login Failed: Invalid mobile or password",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
                         }
                       }
                     },

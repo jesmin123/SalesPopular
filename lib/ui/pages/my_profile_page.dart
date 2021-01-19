@@ -60,22 +60,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     SizedBox(height: LINE_HEIGHT,),
                     ListTile(
                       title: Text(NAME, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR,)),
-                      subtitle: Text(userDataProvider.userData.getName(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
-                    ),
-                    Divider(height: 1),
-                    ListTile(
-                      title: Text(PHONE_NO, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR,)),
-                      subtitle: Text(userDataProvider.userData.getMobileNo(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
+                      subtitle: Text('${userDataProvider.user.name}', style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
                     ),
                     Divider(height: 1),
                     ListTile(
                       title: Text(EMP_ID, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR,)),
-                      subtitle: Text(userDataProvider.userData.getEmpId(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
+                      subtitle: Text('${userDataProvider.user.empId}', style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
                     ),
                     Divider(height: 1),
                     ListTile(
                       title: Text(USER_NAME, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR,)),
-                      subtitle: Text(userDataProvider.userData.getUserName(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
+                      subtitle: Text('${userDataProvider.user.name}', style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
                     ),
                     SizedBox(height: LINE_HEIGHT,),
                     Row(
@@ -86,23 +81,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ),
                     SizedBox(height: LINE_HEIGHT,),
                     ListTile(
-                      title: Text(BRANCH_NAME, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR,)),
-                      subtitle: Text(userDataProvider.userData.getBranchName(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
-                    ),
-                    Divider(height: 1),
-                    ListTile(
                       title: Text(BRANCH_CODE, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR,)),
-                      subtitle: Text(userDataProvider.userData.getBranchCode(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
-                    ),
-                    Divider(height: 1),
-                    ListTile(
-                      title: Text(USER_ID, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR,)),
-                      subtitle: Text(userDataProvider.userData.getUserId(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
+                      subtitle: Text('${userDataProvider.user.branchCode}', style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
                     ),
                     Divider(height: 1),
                     ListTile(
                       title: Text(DEPARTMENT, style: AppFontStyle.regularTextStyle2(APP_BLACK_COLOR,)),
-                      subtitle: Text(userDataProvider.userData.getDepartment(), style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
+                      subtitle: Text('${userDataProvider.user.department}', style: AppFontStyle.bodyTextStyle2(APP_GREY_COLOR)),
                     ),
                     SizedBox(height: LINE_HEIGHT,),
                     InkWell(

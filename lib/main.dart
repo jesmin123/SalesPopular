@@ -17,6 +17,9 @@ import './ui/pages/new_enquiry_page.dart';
 import './constants/colors.dart';
 import './constants/strings.dart';
 import 'ui/pages/home_page.dart';
+import 'ui/pages/otp page.dart';
+import 'ui/pages/updae_password_page.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -34,7 +37,9 @@ class MyApp extends StatelessWidget {
     FOLLOW_UP_PAGE : (context)=>FollowUpPage(),
     LOGIN_PAGE : (context)=>LogInPage(),
     CHANGE_PASSWORD_PAGE :(context)=>ChangePasswordPage(),
-    REGISTRATION_PAGE : (context)=> Register()
+    REGISTRATION_PAGE : (context)=> Register(),
+    OTP_PAGE : (context)=> OTPPage(),
+    NEW_PASSWORD_PAGE : (context)=> NewPasswordPage()
   };
 
   @override
