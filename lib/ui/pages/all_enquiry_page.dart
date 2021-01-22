@@ -1,4 +1,8 @@
 
+import 'package:flutter/cupertino.dart';
+import 'package:sales_popular/constants/app_border_style.dart';
+import 'package:sales_popular/constants/app_font_style.dart';
+import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/ui/widget/cases_item_widget.dart';
 import '../../provider/cases_provider.dart';
@@ -14,6 +18,8 @@ class AllEnquiryPage extends StatefulWidget {
 }
 
 class _AllEnquiryPageState extends State<AllEnquiryPage> {
+  TextEditingController _dateFrom = TextEditingController();
+  TextEditingController _dateTo = TextEditingController();
 
   @override
   void initState() {
@@ -34,17 +40,70 @@ class _AllEnquiryPageState extends State<AllEnquiryPage> {
       appBar: MAppBar(ALL_ENQUIRY_TITLE),
         backgroundColor: APP_WHITE_COLOR,
       body: SafeArea(
-        child: ListView.separated(
-          separatorBuilder: (BuildContext context,int index){
-            return Divider();
-          },
-          shrinkWrap: true,
-            itemCount: enquiryProvider.casesList.length,
-            itemBuilder: (BuildContext context,int index)
-            {
-              return CasesItemWidget(enquiryProvider.casesList[index]);
-            }
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+                Padding(
+                padding: const EdgeInsets.all(16.0),
+                      child: Form(
+                        child: Row(
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: TextFormField(
+                                controller: _dateFrom,
+                                decoration:InputDecoration(
+                                    labelText: "Date From",
+                                    labelStyle: AppFontStyle.regularTextStyle(APP_BLACK_COLOR)
+                                ),
+                              ),
+                            ),
+                            SizedBox(width:  LINE_HEIGHT,),
+                            Flexible(
+                              flex: 1,
+                              child: TextFormField(
+                                controller: _dateTo,
+                                decoration:InputDecoration(
+                                    labelText: "Date To",
+                                    labelStyle: AppFontStyle.regularTextStyle(APP_BLACK_COLOR)
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: LINE_HEIGHT),
+                            Container(alignment: Alignment.bottomCenter,
+                                child:RaisedButton(
+                                  color: Colors.white,
+                                  onPressed: (){
+                                    try {
+                                      enquiryProvider.getSalesWithDateEnquiryDetails(_dateFrom.text, _dateTo.text);
+                                    }catch(e){
+                                      debugPrint(e);
+                                    }
+                                  },
+                                  child:  Icon(Icons.search,color: Colors.blueAccent,),
+                                )),
+
+                          ],
+                        ),
+                      ),
+                    ),
+              ListView.separated(
+                separatorBuilder: (BuildContext context,int index){
+                  return Divider();
+                },
+                shrinkWrap: true,
+                  itemCount: enquiryProvider.casesList.length,
+                  itemBuilder: (BuildContext context,int index)
+                  {
+                    return CasesItemWidget(enquiryProvider.casesList[index]);
+                  }
+              ),
+
+
+            ],
+          ),
         ),
+
 
       )
 

@@ -40,7 +40,14 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
   final singleValidator = MultiValidator([
     RequiredValidator(errorText: 'this field is required'),
   ]);
-
+  void initState(){
+    initData();
+    super.initState();
+  }
+  void initData(){
+    final EnquiryProvider enquiryProvider=Provider.of(context,listen: false);
+    _amountController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.bookingDetails.amount:"");
+  }
 
 
   @override

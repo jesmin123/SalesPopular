@@ -23,7 +23,9 @@ class _NewEnquiryPageState extends State<NewEnquiryPage> {
 
 
 
+
   @override
+
   Widget build(BuildContext context) {
     final FormData formData = Provider.of(context);
     final EnquiryProvider enquiryProvider = Provider.of(context);

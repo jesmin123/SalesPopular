@@ -1,4 +1,6 @@
 
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -23,6 +25,7 @@ class CustomerDetailEntryForm extends StatefulWidget {
   CustomerDetailEntryForm(this._formData,this._enquiryData);
 
   @override
+
   _CustomerDetailEntryFormState createState() => _CustomerDetailEntryFormState();
 }
 
@@ -63,9 +66,26 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
     RequiredValidator(errorText: 'this field is required'),
   ]);
 
+  void initState(){
+    initData();
+    super.initState();
+  }
+  void initData(){
+    final EnquiryProvider enquiryProvider=Provider.of(context,listen: false);
+    _nameController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.customerDetails.customerName:"");
+    _emailController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.customerDetails.email:"");
+    _dobController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.customerDetails.dob:"");
+    _mobNoController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.customerDetails.mobileNo:'');
+    _sccMobNoController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.customerDetails.secondaryMobileNo:'');
+    _addressLine1Controller = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.customerDetails.addressLine1:"");
+    _addressLine2Controller = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.customerDetails.addressLine2:"");
+    _addressAreaController =TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.customerDetails.addressArea:"");
+  }
 
   @override
   Widget build(BuildContext context) {
+
+
     final FormData formData = Provider.of(context);
     final CasesProvider casesProvider = Provider.of(context);
     final CurrentProvider currentProvider = Provider.of(context);

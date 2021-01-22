@@ -7,6 +7,7 @@ import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/strings.dart';
+import 'package:sales_popular/provider/enquiry_provider.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
 
 
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
 Widget build(BuildContext context) {
 
   UserDataProvider userDataProvider = Provider.of(context);
+  EnquiryProvider enquiryProvider = Provider.of(context);
   return Scaffold(
     appBar:  AppBar(
       elevation: 0,
@@ -76,7 +78,9 @@ Widget build(BuildContext context) {
                             ],
                           ),),
                         SizedBox(width: LINE_HEIGHT),
-                        RaisedButton(onPressed: (){naviagteToNewEnquiryPage(context);}, color: APP_WHITE_COLOR, shape: AppBorderStyle.appButtonShape(),
+                        RaisedButton(onPressed: (){
+                          enquiryProvider.selectedCaseModel = null;
+                          naviagteToNewEnquiryPage(context);}, color: APP_WHITE_COLOR, shape: AppBorderStyle.appButtonShape(),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

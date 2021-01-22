@@ -74,7 +74,18 @@ class EnquiryProvider extends ChangeNotifier{
 
   Future getSalesEnquiryDetails() async{
     List<CaseModel> casesListTemp = [];
-    String route ="getenquiries?fromDate=2021-01-13&toDate=2021-01-13&salesExecutive=Naveen P N-26040T";
+    String route ="getopenenquiries?salesExecutive=Naveen P N-26040T";
+    RespObj response = await api.getData(route);
+    List<dynamic> data= response.data['getOpenSalesEnquiriesDetails'];
+    data.forEach((element) {
+      casesListTemp.add(CaseModel.fromJson(element));
+    });
+    casesList = casesListTemp;
+    print(data);
+}
+  Future getSalesWithDateEnquiryDetails(String fromDate,String toDate) async{
+    List<CaseModel> casesListTemp = [];
+    String route ="getenquiries?fromDate=${fromDate}&toDate=${toDate}&salesExecutive=Naveen P N-26040T";
     RespObj response = await api.getData(route);
     List<dynamic> data= response.data['getSalesEnquiriesDetails'];
     data.forEach((element) {
@@ -82,7 +93,7 @@ class EnquiryProvider extends ChangeNotifier{
     });
     casesList = casesListTemp;
     print(data);
-}
+  }
 
 CaseModel _selectedCaseModel;
 

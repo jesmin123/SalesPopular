@@ -40,7 +40,6 @@ class _OTPPageState extends State<OTPPage> {
               textFieldAlignment: MainAxisAlignment.spaceAround,
               fieldStyle: FieldStyle.underline,
               onCompleted: (pin) async {
-                Navigator.pushReplacementNamed(context, NEW_PASSWORD_PAGE);
                 bool status = await userDataProvider.registerOtp(pin);
                 if(status){
                     Navigator.pushReplacementNamed(context, NEW_PASSWORD_PAGE);

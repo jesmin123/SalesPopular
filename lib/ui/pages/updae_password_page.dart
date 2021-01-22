@@ -16,8 +16,8 @@ class NewPasswordPage extends StatefulWidget {
 
 class _NewPasswordPageState extends State<NewPasswordPage> {
 
-  TextEditingController _newPasswordController;
-  TextEditingController _conformPasswordController;
+  TextEditingController _newPasswordController = new TextEditingController();
+  TextEditingController _conformPasswordController = new TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   final passwordValidator = MultiValidator([

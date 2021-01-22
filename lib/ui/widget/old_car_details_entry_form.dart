@@ -26,6 +26,15 @@ class OldCarDetailEntryForm extends StatefulWidget {
 
 class _OldCarDetailEntryFormState extends State<OldCarDetailEntryForm> {
 
+
+  void initState(){
+    initData();
+    super.initState();
+  }
+  void initData(){
+    final EnquiryProvider enquiryProvider=Provider.of(context,listen: false);
+    _remarksController=  TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.oldCarDetails.remarks:"");
+  }
   TextEditingController _remarksController= new TextEditingController();
 
   final _formKey = GlobalKey<FormState>();

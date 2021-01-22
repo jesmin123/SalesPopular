@@ -91,33 +91,7 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
               SizedBox(height: LINE_HEIGHT,),
-                    TextFormField(
-                      validator: passwordValidator,
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: _passwordController,
-                      onChanged: (val) => password = val,
-                      autofocus: false,
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        labelStyle: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),
-                        enabledBorder: AppBorderStyle.getFormBorder(),
-                        focusedBorder: AppBorderStyle.getFormBorder(color: PRIMARY_COLOR),
-                      ),
-                    ),
-              SizedBox(height: LINE_HEIGHT,),
-                    TextFormField(
-                      validator:(val)=> MatchValidator(errorText: 'passwords do not match').validateMatch(val, password),
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: _confirmPasswordController,
-                      autofocus: false,
-                      decoration: InputDecoration(
-                        labelText: "Confirm Password",
-                        labelStyle: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),
-                        enabledBorder: AppBorderStyle.getFormBorder(),
-                        focusedBorder: AppBorderStyle.getFormBorder(color: PRIMARY_COLOR),
-                      ),
-                    ),
-              SizedBox(height: LINE_HEIGHT,),
+
                 Container(
                   width: 360,
                   child: RaisedButton(
