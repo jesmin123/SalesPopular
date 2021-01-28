@@ -44,4 +44,13 @@ class UserData {
   String getBranchCode() {
     return this.branchCode;
   }
+
+  factory UserData.fromJSON(Map<dynamic, dynamic> json){
+    try{
+      return UserData(name: json['UserName'],empId: json['Emp_Code'],branchCode: json['Emp_Branch'],department: json['Department']);
+    }catch(ex){
+      print(ex.toString());
+      return null;
+    }
+  }
 }

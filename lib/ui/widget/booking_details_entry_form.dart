@@ -40,7 +40,14 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
   final singleValidator = MultiValidator([
     RequiredValidator(errorText: 'this field is required'),
   ]);
-
+  void initState(){
+    initData();
+    super.initState();
+  }
+  void initData(){
+    final EnquiryProvider enquiryProvider=Provider.of(context,listen: false);
+    _amountController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.bookingDetails.amount:"");
+  }
 
 
   @override
@@ -109,21 +116,18 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
           ),
           SizedBox(height: LINE_HEIGHT,),
           ButtonTheme(
+
               minWidth: MediaQuery.of(context).size.width-128,
-            child: RaisedButton(onPressed: () async {
-              if (_formKey.currentState.validate()){
+            child: RaisedButton(onPressed: () async {if (_formKey.currentState.validate()){
               Loader.getLoader(context).show();
               BookingDetails bookingDetails = new BookingDetails(
                 salesexecutive: formData.selectedSalesExecutive, paymentType: formData.selectedPaymentType, amount: _amountController.text, source: formData.selectedSource
               );
-
               formData.activeStep=4;
               currentProvider.caseModel.bookingDetails = bookingDetails;
               String dataBase64 = currentProvider.caseModel.getFinalData();
-
               bool status = await currentProvider.saveTransaction(userProvider.UserID, userProvider.SessionID, dataBase64);
               Loader.getLoader(context).hide();
-
               if(status){
                 Navigator.pushNamed(context, HOME_PAGE);
               }else{
@@ -140,16 +144,16 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
               }
               }},
                 color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(FINISH, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR),),
-                  SizedBox(width: TEXT_WIDTH,),
-                  Icon(Icons.done, size: ARROW_RIGHT, color: APP_WHITE_COLOR,)
-                ],
-                )
-          )
-        ),
+            child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+            Text(FINISH, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR),),
+            SizedBox(width: TEXT_WIDTH,),
+            Icon(Icons.done, size: ARROW_RIGHT, color: APP_WHITE_COLOR,)
+        ],
+        )
+    )
+    ),
           SizedBox(height: LINE_HEIGHT*1/2,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -165,6 +169,22 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
 
   enabledTestDrive(bool value) {}
 
+  showSucessDialog() {
+      showDialog(
+          context: context,
+          builder: (BuildContext context){
+            return AlertDialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("Success", style: AppFontStyle.headingTextStyle(APP_BLACK_COLOR),),
+                  SizedBox(height: LINE_HEIGHT*0.5,),
+                  Text("You have punched the enquiry successfully", style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR), textAlign: TextAlign.center,),
+                  Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
 
   }
 

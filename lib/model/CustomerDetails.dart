@@ -64,8 +64,8 @@ class CustomerDetails{
 
   factory CustomerDetails.fromJSON(Map<String,dynamic>json){
     try{
-    return CustomerDetails(customerType: json['customerType'], salutation: json['salutations'], customerName: json['customerType'],
-    dob: json['dob'], email: json['email'], mobileNo: json['mobileNo'], secondaryMobileNo: json['secondaryMobileNo'],
+    return CustomerDetails(customerType: json['customerType'], salutation: json['salutation'], customerName: json['customerName'],
+    dob: json['dob'], email: json['email'], mobileNo: json['mobno'], secondaryMobileNo: json['secondaryMobileNo'],
       addressLine1: json['addressLine1'], addressLine2: json['addressLine2'], addressArea: json['addressArea'],
       village: json['village'], taluk: json['taluk'], district: json['district'], state: json['state']
     );
@@ -141,6 +141,18 @@ class NewCarDetails{
      'time': testDriveTime,
    },
  } ;
+  factory NewCarDetails.fromJSON(Map<String,dynamic>json){
+    try{
+      return NewCarDetails(carMake: json['carMake'],carModel: json['carModel'], variant:  json['variant'],
+          color:  json['color'], likelyToPurchaseWithin:  json['likelyToPurchase'].toString(),  followUpDate:  json['followUP']['date'],
+         followUpTime:   json['followUP']['time'], testDriveDate:  json['testDrive']['date'], testDriveTime:  json['testDrive']['time'],
+          assignToBranch:  json['branch']  );
+    }
+    catch(ex){
+      debugPrint(ex.toString());
+      return null;
+    }
+  }
 
 }
 
@@ -176,6 +188,18 @@ class OldCarDetails{
       'remarks': remarks,
 
   };
+  factory OldCarDetails.fromJSON(Map<String,dynamic>json){
+    try{
+      return OldCarDetails(exchangeCarMake:  json['carMake'], exchangeCarModel:  json['carModel'], exchangeCarVariant: json['varient'],
+          exchangeCarColor:  json['color'], evalutorBranch:  json['evaluatorBranch'], evalutorName:  json['evaluatorName'],
+          remarks:  json['remarks']
+      );
+    }
+    catch(ex){
+      debugPrint(ex.toString());
+      return null;
+    }
+  }
 
 
 }
@@ -198,6 +222,17 @@ class BookingDetails {
     "sourceofEnquiry": source
 
   };
+  factory BookingDetails.fromJSON(Map<String,dynamic>json){
+    try{
+      return BookingDetails(salesexecutive:  json['salesExecutive'], paymentType:  json['paymentType'], amount:  json['amount'].toString(),
+          source:  json['sourceofEnquiry']
+      );
+    }
+    catch(ex){
+      debugPrint(ex.toString());
+      return null;
+    }
+  }
 
 }
 

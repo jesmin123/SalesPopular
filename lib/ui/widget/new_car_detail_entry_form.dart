@@ -22,11 +22,26 @@ class NewCarDetailEntryForm extends StatefulWidget {
 
   NewCarDetailEntryForm(this._formData, this._enquiryData);
 
+
+
   @override
   _NewCarDetailEntryFormState createState() => _NewCarDetailEntryFormState();
 }
 
 class _NewCarDetailEntryFormState extends State<NewCarDetailEntryForm> {
+
+  void initState(){
+    initData();
+    super.initState();
+  }
+  void initData(){
+    final EnquiryProvider enquiryProvider=Provider.of(context,listen: false);
+    _followUpDateController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.newCarDetails.followUpDate:"");
+    _followUpTimeController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.newCarDetails.followUpTime:"");
+    _scheduleCallOnController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.newCarDetails.scheduleCallOn:"");
+    _testDriveDateController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.newCarDetails.testDriveDate:"");
+    _testDriveTimeController = TextEditingController(text: enquiryProvider.selectedCaseModel!=null?enquiryProvider.selectedCaseModel.newCarDetails.testDriveTime:"");
+  }
 
   TextEditingController _followUpDateController =TextEditingController();
   TextEditingController _followUpTimeController = TextEditingController();

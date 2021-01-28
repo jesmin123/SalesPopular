@@ -5,6 +5,10 @@ import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';
+import 'package:provider/provider.dart';
+import 'package:sales_popular/constants/strings.dart';
+import 'package:sales_popular/provider/enquiry_provider.dart';
+import 'package:sales_popular/provider/user_data_provider.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -17,6 +21,9 @@ class _HomePageState extends State<HomePage> {
 
 @override
 Widget build(BuildContext context) {
+
+  UserDataProvider userDataProvider = Provider.of(context);
+  EnquiryProvider enquiryProvider = Provider.of(context);
   return Scaffold(
     appBar:  AppBar(
       elevation: 0,
@@ -37,8 +44,8 @@ Widget build(BuildContext context) {
               child: ListTile(
                 onTap: ()=>naviagteToProfile(context),
                 leading: CircleAvatar( backgroundImage: CachedNetworkImageProvider('https://www.adbasis.com/images/divita-a65623c8.jpg'),maxRadius: CIRCLE_AVATAR_RADIUS*0.5),
-                title: Text("Ajit Kumar", style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR),),
-                subtitle: Text("EMP ID : P456723", style: AppFontStyle.regularTextStyle4(APP_GREY_COLOR),),
+                title: Text("${userDataProvider.user.name}", style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR),),
+                subtitle: Text("EMP ID : ${userDataProvider.user.empId}", style: AppFontStyle.regularTextStyle4(APP_GREY_COLOR),),
                 trailing: Icon(Icons.more_vert),
               ),
             ),
@@ -71,7 +78,9 @@ Widget build(BuildContext context) {
                             ],
                           ),),
                         SizedBox(width: LINE_HEIGHT),
-                        RaisedButton(onPressed: (){naviagteToNewEnquiryPage(context);}, color: APP_WHITE_COLOR, shape: AppBorderStyle.appButtonShape(),
+                        RaisedButton(onPressed: (){
+                          enquiryProvider.selectedCaseModel = null;
+                          naviagteToNewEnquiryPage(context);}, color: APP_WHITE_COLOR, shape: AppBorderStyle.appButtonShape(),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
