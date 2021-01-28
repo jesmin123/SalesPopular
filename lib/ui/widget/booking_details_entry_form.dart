@@ -109,18 +109,21 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
           ),
           SizedBox(height: LINE_HEIGHT,),
           ButtonTheme(
-
               minWidth: MediaQuery.of(context).size.width-128,
-            child: RaisedButton(onPressed: () async {if (_formKey.currentState.validate()){
+            child: RaisedButton(onPressed: () async {
+              if (_formKey.currentState.validate()){
               Loader.getLoader(context).show();
               BookingDetails bookingDetails = new BookingDetails(
                 salesexecutive: formData.selectedSalesExecutive, paymentType: formData.selectedPaymentType, amount: _amountController.text, source: formData.selectedSource
               );
+
               formData.activeStep=4;
               currentProvider.caseModel.bookingDetails = bookingDetails;
               String dataBase64 = currentProvider.caseModel.getFinalData();
+
               bool status = await currentProvider.saveTransaction(userProvider.UserID, userProvider.SessionID, dataBase64);
               Loader.getLoader(context).hide();
+
               if(status){
                 Navigator.pushNamed(context, HOME_PAGE);
               }else{
@@ -137,27 +140,25 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
               }
               }},
                 color: PRIMARY_COLOR, shape: AppBorderStyle.appButtonShape(),
-            child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-            Text(FINISH, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR),),
-            SizedBox(width: TEXT_WIDTH,),
-            Icon(Icons.done, size: ARROW_RIGHT, color: APP_WHITE_COLOR,)
-        ],
-        )
-    )
-    ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(FINISH, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR),),
+                  SizedBox(width: TEXT_WIDTH,),
+                  Icon(Icons.done, size: ARROW_RIGHT, color: APP_WHITE_COLOR,)
+                ],
+                )
+          )
+        ),
           SizedBox(height: LINE_HEIGHT*1/2,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(LineIcons.trash_o, color: APP_RED_COLOR, size: ICON_SIZE,),
               Text(DELETE_CASE, style: AppFontStyle.bodyTextStyle(APP_RED_COLOR),),
-
             ],
           ),
-
-    ]
+       ]
     )
     );
   }

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sales_popular/api/api.dart';
 
 class FormData extends ChangeNotifier {
+
   void initDataLoading() {
+
     getCustomerType();
     getSalutations();
     getStates();
@@ -21,6 +23,7 @@ class FormData extends ChangeNotifier {
     getExchangeCarEvaluators();
     getPaymentTypes();
     getSource();
+
   }
 
   int _activeStep = 0;
@@ -378,6 +381,7 @@ class FormData extends ChangeNotifier {
     _isSalutationLoading = value;
     notifyListeners();
   }
+
   bool _isTestDrive =  false;
 
   bool get isTestDrive => _isTestDrive;
