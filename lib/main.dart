@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sales_popular/provider/current_provider.dart';
+import 'package:sales_popular/provider/follow_provider.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
 import 'package:sales_popular/ui/pages/change_password-page.dart';
 import 'package:sales_popular/ui/pages/delivary_page.dart';
@@ -8,6 +9,7 @@ import 'package:sales_popular/ui/pages/follow_up_page.dart';
 import 'package:sales_popular/ui/pages/login_page.dart';
 import 'package:sales_popular/ui/pages/my_profile_page.dart';
 import 'package:sales_popular/ui/pages/home_page.dart';
+import 'package:sales_popular/ui/pages/new_follow_up.dart';
 import 'package:sales_popular/ui/pages/registration.dart';
 import './provider/cases_provider.dart';
 import './provider/enquiry_provider.dart';
@@ -39,7 +41,8 @@ class MyApp extends StatelessWidget {
     CHANGE_PASSWORD_PAGE :(context)=>ChangePasswordPage(),
     REGISTRATION_PAGE : (context)=> Register(),
     OTP_PAGE : (context)=> OTPPage(),
-    NEW_PASSWORD_PAGE : (context)=> NewPasswordPage()
+    NEW_PASSWORD_PAGE : (context)=> NewPasswordPage(),
+    NEW_FOLLOW : (context)=> NewFollow(),
   };
 
   @override
@@ -51,6 +54,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<CasesProvider>(create: (_)=>CasesProvider()),
         ChangeNotifierProvider<UserDataProvider>(create: (_)=>UserDataProvider()),
         ChangeNotifierProvider<CurrentProvider>(create: (_)=>CurrentProvider()),
+        ChangeNotifierProvider<FollowProvider>(create: (_)=>FollowProvider()),
       ],
       child: MaterialApp(
         title: APP_NAME,

@@ -26,6 +26,7 @@ const ALL_ENQUIRY_TITLE = "All Enquiry";
 const MY_PROFILE_PAGE = 'My Profile';
 const DELIVERY = 'Delivery';
 const FOLLOW_UP = 'Follow Up';
+const NEW_FOLLOW = "Follow Up";
 
 
 
