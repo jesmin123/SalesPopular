@@ -1,9 +1,9 @@
 
-import 'package:ff_contact_avatar/ff_contact_avatar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
-import 'package:sales_popular/constants/app_border_style.dart';
+
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';
@@ -50,8 +50,8 @@ class _FollowUpWidgetState extends State<FollowUpWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(LineIcons.trash_o, color: APP_RED_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(DROP_CASE, style: AppFontStyle.regularTextStyle4(APP_RED_COLOR),))],), color: APP_WHITE_COLOR,textColor: APP_RED_COLOR,),flex: 1),
-            Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.access_alarm, color: APP_MAGANTA_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(POSTPONE,style: AppFontStyle.regularTextStyle4(APP_MAGANTA_COLOR),))],),color: APP_WHITE_COLOR,textColor: APP_MAGANTA_COLOR,),flex: 1),
-            Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.drag_indicator, color: APP_GREEN_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(DROP_CASE, style: AppFontStyle.regularTextStyle4(APP_GREEN_COLOR),))],),color: APP_WHITE_COLOR,textColor: APP_GREEN_COLOR,),flex: 1)
+            Flexible(child: RaisedButton(onPressed: () {Navigator.pushNamed(context, NEW_FOLLOW);},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.access_alarm, color: APP_MAGANTA_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(FOLLOW_UP,style: AppFontStyle.regularTextStyle4(APP_MAGANTA_COLOR),))],),color: APP_WHITE_COLOR,textColor: APP_MAGANTA_COLOR,),flex: 1),
+            Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.drag_indicator, color: APP_GREEN_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(POSTPONE, style: AppFontStyle.regularTextStyle4(APP_GREEN_COLOR),))],),color: APP_WHITE_COLOR,textColor: APP_GREEN_COLOR,),flex: 1)
           ],
         ),
       ],
