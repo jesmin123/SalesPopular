@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:sales_popular/constants/app_font_style.dart';
-
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';

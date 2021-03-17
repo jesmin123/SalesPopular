@@ -90,7 +90,7 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
               onChanged: (val){formData.selectedPaymentType = val;}
           ),
           SizedBox(height: LINE_HEIGHT,),
-          DropdownButtonFormField(
+             DropdownButtonFormField(
               validator: (value) => value == null ? 'this field is required' : null,
               decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
               hint: Text('Source of Enquiry'+'*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
