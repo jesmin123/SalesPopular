@@ -32,7 +32,6 @@ class BookingDetailEntryForm extends StatefulWidget {
 class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
 
   TextEditingController _amountController;
-
   _BookingDetailEntryFormState() {
     _amountController = TextEditingController();
   }
@@ -145,7 +144,6 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
                 autofocus: false,
                 decoration: InputDecoration(
                   labelText: AMOUNT + '*',
-
                   labelStyle: AppFontStyle.labelTextStyle(PRIMARY_COLOR),
                   enabledBorder: AppBorderStyle.getFormBorder(),
                   focusedBorder: AppBorderStyle.getFormBorder(
@@ -250,3 +248,4 @@ class _BookingDetailEntryFormState extends State<BookingDetailEntryForm> {
         });
   }
 }
+
