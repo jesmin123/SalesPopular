@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sales_popular/model/CaseModel.dart';
 import 'package:sales_popular/provider/current_provider.dart';
 import 'package:sales_popular/provider/follow_provider.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';

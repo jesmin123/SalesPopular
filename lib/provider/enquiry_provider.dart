@@ -72,6 +72,20 @@ class EnquiryProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  List<CaseModel> getCasesByDate(String date){
+    List<CaseModel> casesDateList = [];
+
+    casesList.forEach((element) {
+      String caseDate = element.newCarDetails.followUpDate.substring(0,10);
+      if(caseDate==date){
+        casesDateList.add(element);
+      }
+    });
+
+    return casesDateList;
+
+  }
+
   Future getSalesEnquiryDetails() async{
     List<CaseModel> casesListTemp = [];
     String route ="getopenenquiries?salesExecutive=Naveen P N-26040T";
@@ -103,4 +117,15 @@ CaseModel _selectedCaseModel;
     _selectedCaseModel = value;
     notifyListeners();
   }
+
+  List<DateTime> _date;
+
+  List<DateTime> get date => _date;
+
+  set date(List<DateTime> value) {
+    _date = value;
+    notifyListeners();
+  }
+
+
 }

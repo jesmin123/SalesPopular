@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:sales_popular/model/CaseModel.dart';
 
 class FollowProvider extends ChangeNotifier{
 
@@ -82,4 +84,21 @@ set selectedFollowip(int value) {
   _selectedFollowip = value;
   notifyListeners();
 }
+
+DateTime _selectedValue;
+
+DateTime get selectedValue => _selectedValue;
+
+  set selectedValue(DateTime value) {
+    _selectedValue = value;
+  }
+
+  List<CaseModel> _cases=[];
+
+List<CaseModel> get cases => _cases;
+
+  set cases(List<CaseModel> value) {
+    _cases = value;
+    notifyListeners();
+  }
 }

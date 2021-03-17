@@ -64,6 +64,7 @@ class _RegisterState extends State<Register> {
                     controller: _empController,
                     autofocus: false,
                     decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       labelText: "Emp Code",
                       labelStyle: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),
                       enabledBorder: AppBorderStyle.getFormBorder(),
@@ -84,6 +85,7 @@ class _RegisterState extends State<Register> {
                       controller: _mobileController,
                       autofocus: false,
                       decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                         labelText: "Mobile",
                         labelStyle: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),
                         enabledBorder: AppBorderStyle.getFormBorder(),

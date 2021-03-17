@@ -5,6 +5,7 @@ import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/follow_provider.dart';
+import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:sales_popular/ui/widget/SubAppBar.dart';
 import 'package:sales_popular/ui/widget/booking.dart';
 import 'package:sales_popular/ui/widget/enquiry_lost.dart';
@@ -30,6 +31,7 @@ class _NewFollowState extends State<NewFollow> {
   Widget build(BuildContext context) {
 
     FollowProvider followProvider = Provider.of(context);
+    FormData formData  = Provider.of(context);
 
     return Scaffold(
       appBar: MAppBar(FOLLOW_UP),
@@ -48,17 +50,17 @@ class _NewFollowState extends State<NewFollow> {
                       SizedBox(height: 6,),
                       Row(
                         children: [
-                          Flexible(flex: 1,child: Text('Case punched on:')),
+                          Flexible(flex: 1,child: Text('Case punched on:', style: AppFontStyle.labelTextStyle2(APP_BLACK_COLOR),)),
                           SizedBox(width: 16,),
-                          Flexible(flex: 1,child: Text('11 OCT 2020'),)
+                          Flexible(flex: 1,child: Text('11 OCT 2020',style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),),)
                         ],
                       ),
                       SizedBox(height: 6,),
                       Row(
                         children: [
-                          Flexible(flex: 1,child: Text('Last call on:')),
+                          Flexible(flex: 1,child: Text('Last call on:', style: AppFontStyle.labelTextStyle2(APP_BLACK_COLOR))),
                           SizedBox(width: 16,),
-                          Flexible(flex: 1,child: Text('18 OCT 2020'))
+                          Flexible(flex: 1,child: Text('18 OCT 2020', style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR)))
                         ],
                       ),
                       SizedBox(height: 16,),
@@ -70,98 +72,16 @@ class _NewFollowState extends State<NewFollow> {
                             scrollDirection: Axis.horizontal,
 
                             children: <Widget>[
-                              Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.orangeAccent,
-                                    borderRadius: BorderRadius.circular(50),
-                                    shape: BoxShape.rectangle
-                                  ),
-                               child: Padding(
-                                 padding: const EdgeInsets.all(6.0 ),
-                                 child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      new Radio(
-
-                                        value: 0,
-                                        activeColor: Colors.white,
-                                        groupValue: followProvider.selectedFollowip,
-                                        onChanged: (val){followProvider.selectedFollowip = val;
-                                        }
-
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 4),
-                                        child: new Text(
-                                          'Schedule Later  ',style: TextStyle(color: Colors.white),
-
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                               )
-                              ),
-                              SizedBox(width: 4,),
-
-                              Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.redAccent,
-                                      borderRadius: BorderRadius.circular(50),
-                                      shape: BoxShape.rectangle
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        new Radio(
-                                          value: 1,
-                                          activeColor: Colors.white,
-                                          groupValue: followProvider.selectedFollowip,
-                                          onChanged: (val)=>followProvider.selectedFollowip = val,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(right: 10),
-                                          child: new Text(
-                                            'Enquiry Lost',style: TextStyle(color: Colors.white)
-
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              ),
-                              SizedBox(width: 4,),
-                              Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(50),
-                                      shape: BoxShape.rectangle
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        new Radio(
-                                          value: 2,
-                                          activeColor: Colors.white,
-                                          groupValue: followProvider.selectedFollowip,
-                                          onChanged: (val)=>followProvider.selectedFollowip=val,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(right:12.0),
-                                          child: new Text(
-                                            'Booking',style: TextStyle(color: Colors.white)
-
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                              )
+                              followWidget(context, Colors.orangeAccent, 'Schedule Later', 0, followProvider),
+                              SizedBox(width: 12,),
+                              followWidget(context, Colors.redAccent, 'Enquiry Lost', 1, followProvider),
+                              SizedBox(width: 12,),
+                              followWidget(context, Colors.green, 'Booking', 2, followProvider),
                             ],
                           ),
                       ),
-                      getSupportingWidget(followProvider.selectedFollowip)
+                      SizedBox(height: 12,),
+                      getSupportingWidget(followProvider.selectedFollowip,formData)
                           ],
                   )
                 ),
@@ -173,7 +93,7 @@ class _NewFollowState extends State<NewFollow> {
 
   }
 
-  getSupportingWidget(int selectedFollowip) {
+  getSupportingWidget(int selectedFollowip, FormData formData) {
     switch(selectedFollowip){
       case 0:{
         return Schedule();
@@ -182,9 +102,38 @@ class _NewFollowState extends State<NewFollow> {
         return EnquiryLost();
       }
       case 2:{
-        return Booking();
+        return Booking(formData);
       }
     }
   }
 }
 
+Widget followWidget(BuildContext context,Color color, String text, int value , FollowProvider followProvider){
+  return Container(
+      decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(50),
+          shape: BoxShape.rectangle
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Theme(
+              data: Theme.of(context).copyWith(
+                  unselectedWidgetColor: Colors.white,
+              ),
+              child: Radio(
+                value: value,
+                activeColor: Colors.white,
+                groupValue: followProvider.selectedFollowip,
+                onChanged: (val)=>followProvider.selectedFollowip=val,
+              ),
+            ),
+            new Text(text,style: AppFontStyle.labelTextStyle(APP_WHITE_COLOR),),
+          ],
+        ),
+      )
+  );
+}

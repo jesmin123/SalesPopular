@@ -8,7 +8,7 @@ class Loader{
         message: 'Please Wait...',
         borderRadius: 4.0,
         backgroundColor: Colors.white,
-        progressWidget: CircularProgressIndicator(),
+        progressWidget: Transform.scale(scale: 0.6,child: CircularProgressIndicator(strokeWidth: 4,)),
         elevation: 10.0,
         insetAnimCurve: Curves.easeInOut,
         progress: 0.0,

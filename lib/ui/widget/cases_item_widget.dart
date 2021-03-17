@@ -34,7 +34,7 @@ class _CasesItemWidgetState extends State<CasesItemWidget> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("10:00 AM", style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR), ),
+            Text("${widget.caseModel.customerDetails.customerType}", style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR), ),
             VerticalDivider(),
           ],
         ),

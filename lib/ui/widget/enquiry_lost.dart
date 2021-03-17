@@ -14,119 +14,88 @@ class _EnquiryLostState extends State<EnquiryLost> {
     FollowProvider followProvider = Provider.of(context);
     return Container(
       child: Padding(
-        padding: const EdgeInsets.all(25.0),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 4),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(flex: 1,child: Text('Enquiry lost')),
-                Flexible(flex: 1,child: Switch(value: followProvider.enquirySwitch,
-                   activeColor: PRIMARY_COLOR,
+            rowWidget('Enquiry lost',
+                Switch(
+                  value: followProvider.enquirySwitch,
+                  activeColor: PRIMARY_COLOR,
                   activeTrackColor: PRIMARY_COLOR,
                   onChanged: (value)=>followProvider.enquirySwitch=value,
 
-                )),
-              ],
-
+                )
             ),
-            SizedBox(height: 6,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(flex: 1,child: Text("Enquiry lost reason")),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    width: 250,
-                    height: 40,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey[300]
+            SizedBox(height: 12),
+            rowWidget("Enquiry lost reason",
+                Container(
+                  height: 40,
+                  child: DropdownButtonFormField(
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.grey[200])),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.grey[200])),
+                      contentPadding: EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-
-                          value: followProvider.enquiryLostReason,
-                          items: [
-                            DropdownMenuItem(
-                              child: Text("Lost to co-dealer"),
-                              value: 0,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Second Item"),
-                              value: 1,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Third Item"),
-                              value: 2,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Fourth Item"),
-                              value: 3,
-                            )
-                          ],
-                          onChanged: (int value)=>followProvider.enquiryLostReason = value,
-
-
-                        ),
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Lost to co-dealer"),
+                        value: 0,
                       ),
-                    ),
+                      DropdownMenuItem(
+                        child: Text("Second Item"),
+                        value: 1,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Third Item"),
+                        value: 2,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Fourth Item"),
+                        value: 3,
+                      )
+                    ],
+                    onChanged: (int value)=>followProvider.enquiryLostReason = value,
                   ),
                 )
-                ,
-              ],
             ),
-            SizedBox(height: 10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(flex: 1,child: Text("Co dealer")),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    height:40 ,
-                    width: 260,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
-                        shape: BoxShape.rectangle,
-                        color: Colors.grey[300]
+            SizedBox(height: 12,),
+            rowWidget("Co dealer",
+                Container(
+                  height: 40,
+                  child: DropdownButtonFormField(
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.grey[200])),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.grey[200])),
+                      contentPadding: EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-
-                          value: followProvider.coDealer,
-                          items: [
-                            DropdownMenuItem(
-                              child: Text("Indus"),
-                              value: 0,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Second Item"),
-                              value: 1,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Third Item"),
-                              value: 2,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Fourth Item"),
-                              value: 3,
-                            )
-                          ],
-                          onChanged: (int value)=>followProvider.coDealer = value,
-
-
-                        ),
+                    items: [
+                      DropdownMenuItem(
+                        child: Text("Indus"),
+                        value: 0,
                       ),
-                    ),
+                      DropdownMenuItem(
+                        child: Text("Second Item"),
+                        value: 1,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Third Item"),
+                        value: 2,
+                      ),
+                      DropdownMenuItem(
+                        child: Text("Fourth Item"),
+                        value: 3,
+                      )
+                    ],
+                    onChanged: (int value)=>followProvider.coDealer = value,
+
                   ),
                 )
-                ,
-              ],
             ),
 
             SizedBox(height: 20,),
@@ -152,4 +121,15 @@ class _EnquiryLostState extends State<EnquiryLost> {
 
     );
   }
+}
+
+Widget rowWidget(String text, Widget widget){
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Flexible(flex: 1,child: Text(text, style: AppFontStyle.labelTextStyle2(APP_BLACK_COLOR),)),
+      Flexible(flex: 1,child: widget)
+    ],
+
+  );
 }

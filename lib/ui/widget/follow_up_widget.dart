@@ -6,9 +6,15 @@ import 'package:sales_popular/constants/app_font_style.dart';
 import 'package:sales_popular/constants/colors.dart';
 import 'package:sales_popular/constants/dimen.dart';
 import 'package:sales_popular/constants/strings.dart';
+import 'package:sales_popular/model/CaseModel.dart';
+import 'package:sales_popular/provider/form_data_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FollowUpWidget extends StatefulWidget {
+  final CaseModel caseModel;
+
+  FollowUpWidget(this.caseModel);
+
   @override
   _FollowUpWidgetState createState() => _FollowUpWidgetState();
 }
@@ -19,15 +25,15 @@ class _FollowUpWidgetState extends State<FollowUpWidget> {
     return ExpansionTile(
         leading: Padding(
           padding: const EdgeInsets.only(top: 10),
-          child: Text("10:00 AM", style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR),),
+          child: Text("${widget.caseModel.customerDetails.customerType}", style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR),),
         ),
-        title: Text("Mr. Ravi Aswin", style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR)),
-        subtitle: Text("Maruti Suzuki Celerio", style: AppFontStyle.bodyTextStyle(APP_GREY_COLOR),),
+        title: Text('${widget.caseModel.customerDetails.customerName}', style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR)),
+        subtitle: Text('${widget.caseModel.newCarDetails.carMake +" "+ widget.caseModel.newCarDetails.carModel}', style: AppFontStyle.bodyTextStyle(APP_GREY_COLOR),),
       children: [
         ListTile(
-          onTap: ()=>_callCustomer(),
-          title : Text("+91 8921 664 155", style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR),),
-          subtitle: Text("Pathanapuram, Kollam", style: AppFontStyle.bodyTextStyle(APP_GREY_COLOR)),
+          onTap: ()=>_callCustomer(widget.caseModel.customerDetails.mobileNo),
+          title : Text("${widget.caseModel.customerDetails.mobileNo}", style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR),),
+          subtitle: Text("${widget.caseModel.customerDetails.village + ", " + widget.caseModel.customerDetails.district} ", style: AppFontStyle.bodyTextStyle(APP_GREY_COLOR)),
           trailing: Icon(LineIcons.phone),
         ),
         Divider(),
@@ -45,20 +51,21 @@ class _FollowUpWidgetState extends State<FollowUpWidget> {
             child: Text("18 OCT 2020", style: AppFontStyle.regularTextStyle4(APP_BLACK_COLOR)),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(LineIcons.trash_o, color: APP_RED_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(DROP_CASE, style: AppFontStyle.regularTextStyle4(APP_RED_COLOR),))],), color: APP_WHITE_COLOR,textColor: APP_RED_COLOR,),flex: 1),
-            Flexible(child: RaisedButton(onPressed: () {Navigator.pushNamed(context, NEW_FOLLOW);},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.access_alarm, color: APP_MAGANTA_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(FOLLOW_UP,style: AppFontStyle.regularTextStyle4(APP_MAGANTA_COLOR),))],),color: APP_WHITE_COLOR,textColor: APP_MAGANTA_COLOR,),flex: 1),
-            Flexible(child: RaisedButton(onPressed: () {},child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.drag_indicator, color: APP_GREEN_COLOR, size: ICON_SIZE*1.3), SizedBox(width: TEXT_WIDTH*0.2), Expanded(child: Text(POSTPONE, style: AppFontStyle.regularTextStyle4(APP_GREEN_COLOR),))],),color: APP_WHITE_COLOR,textColor: APP_GREEN_COLOR,),flex: 1)
-          ],
-        ),
+        Container(child: RaisedButton(
+            onPressed: (){
+          Navigator.pushNamed(context, NEW_FOLLOW);
+        },
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          color: PRIMARY_COLOR,
+          child: Text("Update Cases", style: AppFontStyle.regularTextStyle(APP_WHITE_COLOR)),
+        ),),
+
       ],
     );
   }
 
-  void _callCustomer() async{
-      const url = 'tel://8921661155';
+  void _callCustomer(String phone) async{
+      var  url = 'tel://$phone';
       if (await canLaunch(url)) {
         await launch(url);
       } else {

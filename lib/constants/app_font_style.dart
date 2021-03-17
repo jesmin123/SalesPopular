@@ -120,4 +120,13 @@ class AppFontStyle{
     );
   }
 
+  static TextStyle labelTextStyle2(Color color, {num textSize}) {
+    return TextStyle(
+        color: color,
+        fontSize: 14,
+        fontWeight: FontWeight.w200,
+        fontFamily: "Poppins"
+    );
+  }
+
 }

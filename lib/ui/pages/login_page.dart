@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:sales_popular/constants/strings.dart';
 import 'package:sales_popular/provider/user_data_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sales_popular/utils/loaderUtilis.dart';
 
 class LogInPage extends StatefulWidget {
 
@@ -23,6 +24,8 @@ class _LogInPageState extends State<LogInPage> {
 
   TextEditingController _userIdController = new TextEditingController();
   TextEditingController _passwordController= new TextEditingController();
+  FocusNode f1 = FocusNode();
+  FocusNode f2 = FocusNode();
 
 
 
@@ -66,8 +69,10 @@ class _LogInPageState extends State<LogInPage> {
                     }
                     return null;
                   },
+                  focusNode: f1,
                   controller: _userIdController,
                   decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                     enabledBorder: AppBorderStyle.getFormBorder(),
                     focusedBorder: AppBorderStyle.getFormBorder(color: APP_BLACK_COLOR),
                     labelText: "User ID",
@@ -82,9 +87,11 @@ class _LogInPageState extends State<LogInPage> {
                     }
                     return null;
                   },
+                  focusNode: f2,
                   controller: _passwordController,
                   obscureText: !formData.isPasswordShown,
                   decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       enabledBorder: AppBorderStyle.getFormBorder(),
                       focusedBorder: AppBorderStyle.getFormBorder(color: APP_BLACK_COLOR),
                       labelText: "Password",
@@ -116,15 +123,20 @@ class _LogInPageState extends State<LogInPage> {
                   child: RaisedButton(
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
+                        f1.unfocus();
+                        f2.unfocus();
+                        Loader.getLoader(context).show();
                         RespObj res = await userDataProvider.login(_userIdController.text, _passwordController.text);
+                        Loader.getLoader(context).hide();
                         if(res.status){
                           Navigator.pushNamed(context, HOME_PAGE);
                         }
                        else{
                           Fluttertoast.showToast(
+
                               msg: "Login Failed: Invalid mobile or password",
                               toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
+                              gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
                               backgroundColor: Colors.red,
                               textColor: Colors.white,
