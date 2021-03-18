@@ -42,22 +42,11 @@ class _EnquiryLostState extends State<EnquiryLost> {
                     items: [
                       DropdownMenuItem(
                         child: Text("Lost to co-dealer"),
-                        value: 0,
+                        value: "Lost to co-dealer",
                       ),
-                      DropdownMenuItem(
-                        child: Text("Second Item"),
-                        value: 1,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Third Item"),
-                        value: 2,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Fourth Item"),
-                        value: 3,
-                      )
+
                     ],
-                    onChanged: (int value)=>followProvider.enquiryLostReason = value,
+                    onChanged: (value)=>followProvider.enquiryLostReason = value,
                   ),
                 )
             ),
@@ -77,22 +66,11 @@ class _EnquiryLostState extends State<EnquiryLost> {
                     items: [
                       DropdownMenuItem(
                         child: Text("Indus"),
-                        value: 0,
+                        value: "Indus",
                       ),
-                      DropdownMenuItem(
-                        child: Text("Second Item"),
-                        value: 1,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Third Item"),
-                        value: 2,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Fourth Item"),
-                        value: 3,
-                      )
+
                     ],
-                    onChanged: (int value)=>followProvider.coDealer = value,
+                    onChanged: (value)=>followProvider.coDealer = value,
 
                   ),
                 )
@@ -108,9 +86,7 @@ class _EnquiryLostState extends State<EnquiryLost> {
                 child: Center(child: Text('Save',style: AppFontStyle.labelTextStyle(APP_WHITE_COLOR)),),
               ),
               onTap: (){
-
-
-
+                followProvider.selectEnquiryLost(followProvider.enquirySwitch, followProvider.enquiryLostReason, followProvider.coDealer);
               },
             ),
 

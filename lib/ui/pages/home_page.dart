@@ -33,128 +33,44 @@ Widget build(BuildContext context) {
       automaticallyImplyLeading: false,
     ),
     backgroundColor: APP_WHITE_COLOR,
-    body: SafeArea(
-      child: SingleChildScrollView(
+    body: Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SafeArea(
+        child: SingleChildScrollView(
 
-        child: Column(
-          children: [
-            SizedBox(height: LINE_HEIGHT),
-            Card(
-              elevation: 4,
-              child: ListTile(
-                onTap: ()=>naviagteToProfile(context),
-                leading: CircleAvatar( backgroundImage: CachedNetworkImageProvider('https://www.adbasis.com/images/divita-a65623c8.jpg'),maxRadius: CIRCLE_AVATAR_RADIUS*0.5),
-                title: Text("${userDataProvider.user.name}", style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR),),
-                subtitle: Text("EMP ID : ${userDataProvider.user.empId}", style: AppFontStyle.regularTextStyle4(APP_GREY_COLOR),),
-                trailing: Icon(Icons.more_vert),
+          child: Column(
+            children: [
+              SizedBox(height: LINE_HEIGHT),
+              Card(
+                elevation: 4,
+                child: ListTile(
+                  onTap: ()=>naviagteToProfile(context),
+
+                  leading: CircleAvatar( backgroundImage: CachedNetworkImageProvider('https://www.adbasis.com/images/divita-a65623c8.jpg'),maxRadius: CIRCLE_AVATAR_RADIUS*0.5),
+                  title: Text("${userDataProvider.user.name}", style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR),),
+                  subtitle: Text("EMP ID : ${userDataProvider.user.empId}", style: AppFontStyle.regularTextStyle4(APP_GREY_COLOR),),
+                  trailing: Icon(Icons.more_vert),
+                ),
               ),
-            ),
-            SizedBox(height: LINE_HEIGHT),
-            Container(
-              padding: EdgeInsets.all(16),
-              width: MediaQuery.of(context).size.width,
-              color: APP_BLACK_COLOR,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Text(CASES, style: AppFontStyle.regularTextStyle(APP_WHITE_COLOR), ),
-                  ListTile(
-                    leading: Text("14", style: AppFontStyle.ultraTextStyle(APP_WHITE_COLOR),) ,
-                    title: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit", style: AppFontStyle.regularTextStyle4(APP_WHITE_COLOR),),
-                  ),
-                  SizedBox(height: LINE_HEIGHT),
-                  Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        RaisedButton(onPressed: (){naviagteToViewCase(context);}, color: APP_WHITE_COLOR, shape: AppBorderStyle.appButtonShape(),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(VIEW_CASE, style: AppFontStyle.buttonTextStyle(APP_BLACK_COLOR),),
-                              SizedBox(width: TEXT_WIDTH,),
-                              Icon(Icons.arrow_forward_ios_outlined, size: ARROW_RIGHT, color: APP_BLACK_COLOR,)
-                            ],
-                          ),),
-                        SizedBox(width: LINE_HEIGHT),
-                        RaisedButton(onPressed: (){
-                          enquiryProvider.selectedCaseModel = null;
-                          naviagteToNewEnquiryPage(context);}, color: APP_WHITE_COLOR, shape: AppBorderStyle.appButtonShape(),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(ADD_NEW, style: AppFontStyle.buttonTextStyle(APP_BLACK_COLOR),),
-                              SizedBox(width: TEXT_WIDTH,),
-                              Icon(Icons.arrow_forward_ios_outlined, size: ARROW_RIGHT, color: APP_BLACK_COLOR,)
-                            ],
-                          ),),
-                      ],
-                    ),
-                  ),
-
-                ],
+              SizedBox(height: LINE_HEIGHT),
+              cardWidget("Cases", "14",  "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit",
+                 Row(
+                   children: [
+                     button((){Navigator.pushNamed(context, ALL_ENQUIRY_PAGE);}, "View Case"),
+                     SizedBox(width: 12,),
+                     button((){Navigator.pushNamed(context, NEW_ENQUIRY_PAGE);}, "Add New"),
+                   ],
+                 )
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(16),
-              width: MediaQuery.of(context).size.width,
-              color: APP_WHITE_COLOR,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Text(DELIVERY, style: AppFontStyle.regularTextStyle(APP_BLACK_COLOR), ),
-                  ListTile(
-                    leading: Text("14", style: AppFontStyle.ultraTextStyle(APP_BLACK_COLOR),) ,
-                    title: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit", style: AppFontStyle.regularTextStyle4(APP_BLACK_COLOR),),
-                  ),
-                  SizedBox(height: LINE_HEIGHT),
-                  Center(
-                    child: RaisedButton(onPressed: (){naviagteToViewDelivery(context);}, color: APP_BLACK_COLOR, shape: AppBorderStyle.appButtonShape(),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(VIEW_DELIVERY, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR),),
-                          SizedBox(width: TEXT_WIDTH,),
-                          Icon(Icons.arrow_forward_ios_outlined, size: ARROW_RIGHT, color: APP_WHITE_COLOR,)
-                        ],
-                      ),),
-                  ),
-
-                ],
+              SizedBox(height: 12,),
+              cardWidget("Delivery", "14",  "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit",
+                button((){Navigator.pushNamed(context, DELIVERY_PAGE);}, "View Delivary"),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(16),
-              width: MediaQuery.of(context).size.width,
-              color: APP_BLACK_COLOR,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Text(FOLLOW_UP, style: AppFontStyle.regularTextStyle(APP_WHITE_COLOR), ),
-                  ListTile(
-                    leading: Text("14", style: AppFontStyle.ultraTextStyle(APP_WHITE_COLOR),) ,
-                    title: Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit", style: AppFontStyle.regularTextStyle4(APP_WHITE_COLOR),),
-                  ),
-                  SizedBox(height: LINE_HEIGHT),
-                  Center(
-                    child: RaisedButton(onPressed: (){naviagteToViewFollowUp(context);}, color: APP_WHITE_COLOR, shape: AppBorderStyle.appButtonShape(),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(VIEW_FOLLOW_UP, style: AppFontStyle.buttonTextStyle(APP_BLACK_COLOR),),
-                          SizedBox(width: TEXT_WIDTH,),
-                          Icon(Icons.arrow_forward_ios_outlined, size: ARROW_RIGHT, color: APP_BLACK_COLOR,)
-                        ],
-                      ),),
-                  ),
-
-                ],
-              ),
-            )
-          ],
+          SizedBox(height: 12,),
+          cardWidget("Delivery", "14",  "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit",
+            button((){Navigator.pushNamed(context, FOLLOW_UP_PAGE);}, "View Followup"))
+            ],
+          ),
         ),
       ),
     ),
@@ -180,4 +96,64 @@ void naviagteToViewDelivery(BuildContext context) {
 void naviagteToViewFollowUp(BuildContext context) {
   Navigator.pushNamed(context, FOLLOW_UP_PAGE);
 }
+
+Widget cardWidget(String cases, String number, String text, Widget widget){
+  return Container(
+    child: Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 24),
+                child: Column(
+                  children: [
+                    Text(cases, style: AppFontStyle.headingTextStyle(APP_BLACK_COLOR),),
+                    Text(number, style: AppFontStyle.ultraTextStyle(APP_BLACK_COLOR)),
+
+                  ],
+                ),
+              ),
+              VerticalDivider(thickness: 1.0,),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(text, style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR),),
+                      SizedBox(height:12,),
+                      widget
+                    ],
+                  ),
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget button(Function function, String text){
+  return  RaisedButton(
+      color: PRIMARY_COLOR,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      onPressed: function,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(text, style: AppFontStyle.buttonTextStyle(APP_WHITE_COLOR)),
+          SizedBox(width: 2,),
+          Icon(Icons.arrow_forward_ios_outlined, color: APP_WHITE_COLOR, size: 12,)
+        ],
+      )
+  );
+}
+
 }

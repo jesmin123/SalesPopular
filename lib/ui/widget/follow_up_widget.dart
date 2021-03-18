@@ -37,20 +37,20 @@ class _FollowUpWidgetState extends State<FollowUpWidget> {
           trailing: Icon(LineIcons.phone),
         ),
         Divider(),
-        ListTile(
-          title: Text(CASE_PUNCHED_ON, style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR)),
-          trailing: Text("11 OCT 2020", style: AppFontStyle.regularTextStyle4(APP_BLACK_COLOR)),
-        ),
-        ListTile(
-          title: Padding(
-            padding: const EdgeInsets.only(bottom: 32),
-            child: Text(LAST_CALL_ON, style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR)),
-          ),
-          trailing: Padding(
-            padding: const EdgeInsets.only(bottom: 32),
-            child: Text("18 OCT 2020", style: AppFontStyle.regularTextStyle4(APP_BLACK_COLOR)),
-          ),
-        ),
+//        ListTile(
+//          title: Text(CASE_PUNCHED_ON, style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR)),
+//          trailing: Text("11 OCT 2020", style: AppFontStyle.regularTextStyle4(APP_BLACK_COLOR)),
+//        ),
+//        ListTile(
+//          title: Padding(
+//            padding: const EdgeInsets.only(bottom: 32),
+//            child: Text(LAST_CALL_ON, style: AppFontStyle.regularTextStyle3(APP_BLACK_COLOR)),
+//          ),
+//          trailing: Padding(
+//            padding: const EdgeInsets.only(bottom: 32),
+//            child: Text("18 OCT 2020", style: AppFontStyle.regularTextStyle4(APP_BLACK_COLOR)),
+//          ),
+//        ),
         Container(child: RaisedButton(
             onPressed: (){
           Navigator.pushNamed(context, NEW_FOLLOW);
@@ -59,6 +59,7 @@ class _FollowUpWidgetState extends State<FollowUpWidget> {
           color: PRIMARY_COLOR,
           child: Text("Update Cases", style: AppFontStyle.regularTextStyle(APP_WHITE_COLOR)),
         ),),
+        SizedBox(height: 12,)
 
       ],
     );

@@ -60,9 +60,7 @@ class _BookingState extends State<Booking> {
                 child: Center(child: Text('Save',style: AppFontStyle.labelTextStyle(APP_WHITE_COLOR)),),
               ),
               onTap: (){
-
-
-
+                followProvider.selectBoking(followProvider.bookingSwitch, followProvider.bookingBranch);
               },
             ),
 

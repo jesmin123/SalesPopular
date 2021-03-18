@@ -5,15 +5,51 @@ import 'package:sales_popular/model/CaseModel.dart';
 class FollowProvider extends ChangeNotifier{
 
 int _selectedFollowip = 0;
-int _openReason =0;
-int _enquiryStatus=0;
-String _instruction="";
+String _openReason;
+String _enquiryStatus;
 bool _enquirySwitch = false;
-int _enquiryLostReason= 0;
-int _coDealer=0;
+String _enquiryLostReason;
+String _coDealer;
 bool _bookingSwitch=false;
-int _bookingBranch = 0;
-DateTime _nextFollowUpDate;
+String _bookingBranch;
+
+
+String get enquiryStatus => _enquiryStatus;
+
+  set enquiryStatus(String value) {
+    _enquiryStatus = value;
+    notifyListeners();
+  }
+
+  String get openReason => _openReason;
+
+  set openReason(String value) {
+    _openReason = value;
+    notifyListeners();
+  }
+
+  String get coDealer => _coDealer;
+
+  set coDealer(String value) {
+    _coDealer = value;
+    notifyListeners();
+  }
+
+  String get enquiryLostReason => _enquiryLostReason;
+
+  set enquiryLostReason(String value) {
+    _enquiryLostReason = value;
+    notifyListeners();
+  }
+
+  String get bookingBranch => _bookingBranch;
+
+  set bookingBranch(String value) {
+    _bookingBranch = value;
+    notifyListeners();
+  }
+
+  DateTime _nextFollowUpDate;
 
 DateTime get nextFollowUpDate => _nextFollowUpDate;
 
@@ -22,12 +58,6 @@ DateTime get nextFollowUpDate => _nextFollowUpDate;
     notifyListeners();
   }
 
-  int get bookingBranch => _bookingBranch;
-
-  set bookingBranch(int value) {
-    _bookingBranch = value;
-    notifyListeners();
-  }
 
   bool get bookingSwitch => _bookingSwitch;
 
@@ -36,19 +66,8 @@ DateTime get nextFollowUpDate => _nextFollowUpDate;
     notifyListeners();
   }
 
-  int get coDealer => _coDealer;
 
-  set coDealer(int value) {
-    _coDealer = value;
-    notifyListeners();
-  }
 
-  int get enquiryLostReason => _enquiryLostReason;
-
-  set enquiryLostReason(int value) {
-    _enquiryLostReason = value;
-    notifyListeners();
-  }
 
   bool get enquirySwitch => _enquirySwitch;
 
@@ -57,26 +76,6 @@ DateTime get nextFollowUpDate => _nextFollowUpDate;
     notifyListeners();
   }
 
-  String get instruction => _instruction;
-
-  set instruction(String value) {
-    _instruction = value;
-    notifyListeners();
-  }
-
-  int get enquiryStatus => _enquiryStatus;
-
-  set enquiryStatus(int value) {
-    _enquiryStatus = value;
-    notifyListeners();
-  }
-
-  int get openReason => _openReason;
-
-  set openReason(int value) {
-    _openReason = value;
-    notifyListeners();
-  }
 
   int get selectedFollowip => _selectedFollowip;
 
@@ -101,4 +100,17 @@ List<CaseModel> get cases => _cases;
     _cases = value;
     notifyListeners();
   }
+
+  selectScheduleLater(String date, String reason, String status, String followup){
+    //TODO implement logic here
+  }
+
+  selectEnquiryLost(bool enquiry, String reason, String dealer){
+    //TODO implement logic here
+  }
+
+  selectBoking(bool booking, String branch){
+    //TODO implement logic here
+  }
+
 }

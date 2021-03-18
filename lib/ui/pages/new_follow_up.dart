@@ -47,23 +47,23 @@ class _NewFollowState extends State<NewFollow> {
                       Text('Mr. Ashwin Thomas',style: AppFontStyle.headingTextStyle(APP_BLACK_COLOR),),
                       SizedBox(height: 6,),
                       Text('Maruti Suzuki Celerio',style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),),
-                      SizedBox(height: 6,),
-                      Row(
-                        children: [
-                          Flexible(flex: 1,child: Text('Case punched on:', style: AppFontStyle.labelTextStyle2(APP_BLACK_COLOR),)),
-                          SizedBox(width: 16,),
-                          Flexible(flex: 1,child: Text('11 OCT 2020',style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),),)
-                        ],
-                      ),
-                      SizedBox(height: 6,),
-                      Row(
-                        children: [
-                          Flexible(flex: 1,child: Text('Last call on:', style: AppFontStyle.labelTextStyle2(APP_BLACK_COLOR))),
-                          SizedBox(width: 16,),
-                          Flexible(flex: 1,child: Text('18 OCT 2020', style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR)))
-                        ],
-                      ),
-                      SizedBox(height: 16,),
+                      SizedBox(height: 24,),
+//                      Row(
+//                        children: [
+//                          Flexible(flex: 1,child: Text('Case punched on:', style: AppFontStyle.labelTextStyle2(APP_BLACK_COLOR),)),
+//                          SizedBox(width: 16,),
+//                          Flexible(flex: 1,child: Text('11 OCT 2020',style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR),),)
+//                        ],
+//                      ),
+//                      SizedBox(height: 6,),
+//                      Row(
+//                        children: [
+//                          Flexible(flex: 1,child: Text('Last call on:', style: AppFontStyle.labelTextStyle2(APP_BLACK_COLOR))),
+//                          SizedBox(width: 16,),
+//                          Flexible(flex: 1,child: Text('18 OCT 2020', style: AppFontStyle.labelTextStyle(APP_BLACK_COLOR)))
+//                        ],
+//                      ),
+//                      SizedBox(height: 16,),
 
                       Container(
                         height: 50,

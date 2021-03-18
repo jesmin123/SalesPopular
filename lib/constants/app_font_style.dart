@@ -42,7 +42,7 @@ class AppFontStyle{
   static TextStyle ultraTextStyle(Color color, {num textSize}) {
     return TextStyle(
         color: color,
-        fontSize: 36,
+        fontSize: textSize!=null?textSize:36,
         fontWeight: FontWeight.w500,
         fontFamily: "Poppins"
     );

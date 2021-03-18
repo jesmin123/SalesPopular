@@ -73,22 +73,10 @@ class _ScheduleState extends State<Schedule> {
                       items: [
                         DropdownMenuItem(
                           child: Text("Waiting period", ),
-                          value: 0,
+                          value: "Waiting period",
                         ),
-                        DropdownMenuItem(
-                          child: Text("Second Item"),
-                          value: 1,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Third Item"),
-                          value: 2,
-                        ),
-                        DropdownMenuItem(
-                          child: Text("Fourth Item"),
-                          value: 3,
-                        )
                       ],
-                      onChanged: (int value)=>followProvider.openReason = value,
+                      onChanged: (value)=>followProvider.openReason = value,
                   ),
                 )
             ),
@@ -107,22 +95,11 @@ class _ScheduleState extends State<Schedule> {
                     items: [
                       DropdownMenuItem(
                         child: Text("Postponed"),
-                        value: 0,
+                        value: "Postponed",
                       ),
-                      DropdownMenuItem(
-                        child: Text("Second Item"),
-                        value: 1,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Third Item"),
-                        value: 2,
-                      ),
-                      DropdownMenuItem(
-                        child: Text("Fourth Item"),
-                        value: 3,
-                      )
+
                     ],
-                    onChanged: (int value)=>followProvider.enquiryStatus = value,
+                    onChanged: (value)=>followProvider.enquiryStatus = value,
                   ),
                 )
             ),
@@ -152,9 +129,7 @@ class _ScheduleState extends State<Schedule> {
                 child: Center(child: Text('Save',style: AppFontStyle.labelTextStyle(APP_WHITE_COLOR)),),
                 ),
               onTap: (){
-                followProvider.instruction = _followUp.text;
-
-
+                followProvider.selectScheduleLater(_followUpDate.text, followProvider.openReason, followProvider.enquiryStatus, _followUp.text);
               },
             ),
 
