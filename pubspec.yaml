@@ -31,7 +31,7 @@ dependencies:
   path_provider: ^1.6.14
   line_icons: ^0.2.0
   carousel_slider: ^2.2.1
-  provider: ^4.3.2+1
+  provider: ^4.3.3
   shared_preferences: ^0.5.10
   cached_network_image: ^2.0.0
   http: ^0.12.2

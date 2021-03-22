@@ -19,10 +19,9 @@ import 'package:sales_popular/utils/loaderUtilis.dart';
 
 class CustomerDetailEntryForm extends StatefulWidget {
 
-  final FormData _formData;
-  final EnquiryProvider _enquiryData;
 
-  CustomerDetailEntryForm(this._formData,this._enquiryData);
+
+  CustomerDetailEntryForm();
 
   @override
 
@@ -43,14 +42,14 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
 
 
   _CustomerDetailEntryFormState(){
-     _nameController = TextEditingController();
-     _emailController = TextEditingController();
-     _dobController = TextEditingController();
-     _mobNoController = TextEditingController();
-     _sccMobNoController = TextEditingController();
-     _addressLine1Controller = TextEditingController();
-     _addressLine2Controller = TextEditingController();
-     _addressAreaController =TextEditingController();
+     // _nameController = TextEditingController();
+     // _emailController = TextEditingController();
+     // _dobController = TextEditingController();
+     // _mobNoController = TextEditingController();
+     // _sccMobNoController = TextEditingController();
+     // _addressLine1Controller = TextEditingController();
+     // _addressLine2Controller = TextEditingController();
+     // _addressAreaController =TextEditingController();
 
   }
 
@@ -67,7 +66,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
   ]);
 
   void initState(){
-    initData();
+     // initData();
     super.initState();
   }
   void initData(){
@@ -89,6 +88,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
     final FormData formData = Provider.of(context);
     final CasesProvider casesProvider = Provider.of(context);
     final CurrentProvider currentProvider = Provider.of(context);
+    final EnquiryProvider enquiryData = Provider.of(context);
 
     return Form(
       key: _formKey,
@@ -99,7 +99,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
               decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
               hint: Text(SELECT_CUSTOMER_TYPE+ '*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR),),
               icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-              items: widget._formData.customerType.map((e){
+              items: formData.customerType.map((e){
                 return DropdownMenuItem(child: Text(e),value: e,);
               }).toList(),
               onChanged: (e){formData.selectedCustomerType=e;}
@@ -110,7 +110,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
               decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
               hint: Text(SELECT_SALUTATIONS+ '*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR)),
               icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-              items: widget._formData.salutations.map((e){
+              items: formData.salutations.map((e){
                 return DropdownMenuItem(child: Text(e),value: e,);
               }).toList(),
               onChanged: (e){formData.selectedSalutations=e;}
@@ -182,7 +182,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
             ),
           ),
           SizedBox(height: LINE_HEIGHT,),
-          RaisedButton(onPressed: (){validateCustomer(_mobNoController.text,widget._enquiryData);}, color: APP_OFF_WHITE, child: Text(EXISTING_CUSTOMER), shape: AppBorderStyle.appButtonShape() ),
+          RaisedButton(onPressed: (){validateCustomer(_mobNoController.text,enquiryData);}, color: APP_OFF_WHITE, child: Text(EXISTING_CUSTOMER), shape: AppBorderStyle.appButtonShape() ),
           SizedBox(height: LINE_HEIGHT,),
           TextFormField(
             validator: singleValidator,
@@ -224,7 +224,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
               decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
               hint: Text(VILLAGE+ '*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR)),
               icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-              items: widget._formData.villages.map((e){
+              items: formData.villages.map((e){
                 return DropdownMenuItem(child: Text(e['village']),value: e['village'],);
               }).toList(),
               onChanged: (village){formData.selectedVillages=village;}
@@ -236,7 +236,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
               hint: Text(TALUK+ '*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR)),
               icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
 
-              items: widget._formData.taluks.map((e){
+              items: formData.taluks.map((e){
                 return DropdownMenuItem(child: Text(e),value: e,);
               }).toList(),
               onChanged: (value){formData.selectedTaluk= value;}
@@ -248,7 +248,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
               hint: Text(DISTRICT+ '*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR)),
               icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
 
-              items: widget._formData.districts.map((e){
+              items: formData.districts.map((e){
                 return DropdownMenuItem(child: Text(e['district']),value: e['district'],);
               }).toList(),
               onChanged: (value){formData.selectedDistrict= value;}
@@ -259,7 +259,7 @@ class _CustomerDetailEntryFormState extends State<CustomerDetailEntryForm> {
               decoration: InputDecoration(enabledBorder: AppBorderStyle.getFormBorder()),
               hint: Text(STATE+ '*', style: AppFontStyle.labelTextStyle(PRIMARY_COLOR)),
               icon: Icon(Icons.keyboard_arrow_down, color: PRIMARY_COLOR,),
-              items: widget._formData.states.map((e){
+              items: formData.states.map((e){
                 return DropdownMenuItem(child: Text(e),value: e,);
               }).toList(),
               onChanged: (value){formData.selectedState = value;}
